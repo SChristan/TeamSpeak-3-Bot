@@ -1,25 +1,26 @@
 package com.features.management;
 
-import com.bot.TS3Connection;
-import com.github.theholywaffle.teamspeak3.TS3Api;
+import com.bot.TS3Constants;
+import com.bot.TS3Events;
+import com.bot.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientMovedEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
+import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 
 public class Events {
 
-    private static TS3Api api_ = TS3Connection.getApi();
     private static TS3EventAdapter event_adapter_;
 
     public static void startListen() {
         createEventAdapter();
-        api_.addTS3Listeners(event_adapter_);
+        TS3Events.addListener(event_adapter_);
     }
 
     public static void stopListen() {
-        api_.removeTS3Listeners(event_adapter_);
+        TS3Events.removeListener(event_adapter_);
     }
 
     private static void createEventAdapter() {
@@ -38,17 +39,33 @@ public class Events {
 
             @Override
             public void onClientJoin(ClientJoinEvent joinEvent) {
-                ManagementBot.getLogger().info("Client Join Event in ManagementBot was executed.");
+                if (ActivityDisplay.getManagerClients().containsKey(joinEvent.getUniqueClientIdentifier())) {
+                    Client client = TS3Infos.getOnlineClients().get(joinEvent.getClientId());
+                    Types activity_status = Types.IS_ONLINE;
+                    if (client.getChannelId() == TS3Constants.CHANNEL_ID_AFK_SHORT || client.getChannelId() == TS3Constants.CHANNEL_ID_AFK_LONG) {
+                        activity_status = Types.IS_AFK;
+                    }
+                    ActivityDisplay.getManagerClients().get(joinEvent.getUniqueClientIdentifier()).setActivityStatus(activity_status);
+                    ActivityDisplay.updateChannelDescription(ActivityDisplay.getClientRole(client));
+        
+                    ManagementBot.getLogger().info(joinEvent.getClientNickname() + " joined the server.");
+                }
             }
 
             @Override
             public void onClientLeave(ClientLeaveEvent leaveEvent) {
-                ManagementBot.getLogger().info("Client Leave Event in ManagementBot was executed.");
+                Client client = TS3Infos.getOnlineClients().get(leaveEvent.getClientId());
+                String unique_identifier = client.getUniqueIdentifier();
+                if (ActivityDisplay.getManagerClients().containsKey(unique_identifier)) {
+                    ActivityDisplay.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_OFFLINE);
+                    ActivityDisplay.updateChannelDescription(ActivityDisplay.getClientRole(client));
+
+                    ManagementBot.getLogger().info(ActivityDisplay.getManagerClients().get(unique_identifier).getNickname() + " left the server.");
+                }
             }
 
             @Override
             public void onClientMoved(ClientMovedEvent movedEvent) {
-                ManagementBot.getLogger().info("Client Moved Event in ManagementBot was executed.");
             }
         };
     }
