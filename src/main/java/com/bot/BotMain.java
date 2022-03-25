@@ -14,6 +14,7 @@ public class BotMain {
 
     public static void main(String[] args) {
         TS3Connection.connect();
+        TS3Events.listen();
     }
 
     public static Logger getLogger() {
