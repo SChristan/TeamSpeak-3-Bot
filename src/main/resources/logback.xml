@@ -1,0 +1,48 @@
+<configuration>
+  <!-- Constants -->
+  <timestamp key="timestamp_day" datePattern="yyyy-MM-dd"/>
+  <property name="encoder_pattern" value="%d{HH:mm:ss.SSS} [%thread] [%level] - %msg%n"/>
+  <property name="level" value="DEBUG"/>
+  <property name="append" value="FALSE"/>
+
+  <!-- ROOT Logger -->
+  <appender name="ROOT_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/root_${timestamp_day}.log</file>
+    <append>${append}</append>
+    <encoder><pattern>${encoder_pattern}</pattern></encoder>
+  </appender>
+  <root level="${level}">
+    <appender-ref ref="ROOT_LOGGER" />
+  </root>
+
+  <!-- TS3-API Logger -->
+  <appender name="TS3_API_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/ts3-api_${timestamp_day}.log</file>
+    <append>${append}</append>
+    <encoder><pattern>${encoder_pattern}</pattern></encoder>
+  </appender>
+  <logger name="com.github.theholywaffle" level="${level}" additivity="TRUE">   <!-- additivity: If the message will be added to the parent logger. -->
+        <appender-ref ref="TS3_API_LOGGER"/>
+  </logger>
+
+  <!-- BOT_MAIN Logger -->
+  <appender name="BOT_MAIN_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/bot_${timestamp_day}.log</file>
+    <append>${append}</append>
+    <encoder><pattern>${encoder_pattern}</pattern></encoder>
+  </appender>
+  <logger name="com.bot.BotMain" level="${level}" additivity="TRUE">
+        <appender-ref ref="BOT_MAIN_LOGGER"/>
+  </logger>
+
+  <!-- Management-Bot Logger -->
+  <appender name="MANAGEMENT_BOT_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/management_${timestamp_day}.log</file>
+    <append>${append}</append>
+    <encoder><pattern>${encoder_pattern}</pattern></encoder>
+  </appender>
+  <logger name="com.features.management.ManagementBot" level="${level}" additivity="TRUE">
+        <appender-ref ref="MANAGEMENT_BOT_LOGGER"/>
+  </logger>
+
+</configuration>
