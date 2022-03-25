@@ -29,17 +29,17 @@ public class TS3Connection {
 
 	public static void connect() {
 		config_ = new TS3Config();
-		config_.setHost("hostname");
+		config_.setHost(TS3Constants.HOSTNAME);
 		config_.setFloodRate(FloodRate.UNLIMITED);
-		config_.setEnableCommunicationsLogging(true);
+		config_.setEnableCommunicationsLogging(TS3Constants.ENABLE_COMMUNICATIONS_LOGGING);
 		config_.setReconnectStrategy(ReconnectStrategy.constantBackoff(200000));
 		config_.setConnectionHandler(new ConnectionHandler() {
 			@Override
-			public void onConnect(TS3Query ts3Query) {
-				TS3Api api = ts3Query.getApi();
-				api.login("username", "password");
-				api.selectVirtualServerByPort(10050, "nickname");
+			public void onConnect(TS3Api api) {
+				api.login(TS3Constants.QUERY_LOGIN, TS3Constants.QUERY_PASSWORD);
+				api.selectVirtualServerByPort(TS3Constants.PORT, TS3Constants.BOT_NICKNAME);
 				api.registerEvents(TS3EventType.TEXT_PRIVATE, TS3EventType.SERVER, TS3EventType.CHANNEL);
+				TS3Infos.loadOnlineClients(api);
 			}
 
 			@Override
