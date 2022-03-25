@@ -46,8 +46,8 @@ public class MySQL {
 
     public void disconnect() {
         try {
-            connection_.close();
             statement_.close();
+            connection_.close();
             log_.info("Database connection was closed.");
         } catch (SQLException e) {
             log_.error("Exception in MySQL disconnect():", e);
