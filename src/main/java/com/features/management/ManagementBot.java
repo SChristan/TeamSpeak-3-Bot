@@ -1,22 +1,25 @@
-package com.bot;
+package com.features.management;
 
 import java.sql.Statement;
 
-import com.features.management.ManagementBot;
 import com.mysql.MySQL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BotMain {
-    
-    private static final Logger log_ = LoggerFactory.getLogger(BotMain.class);
+public class ManagementBot {
+
+    private static final Logger log_ = LoggerFactory.getLogger(ManagementBot.class);
     private static MySQL sql_ = new MySQL(log_, "databaseURL", "databaseUsername", "databasePassword");
 
-    public static void main(String[] args) {
-        TS3Connection.connect();
-        TS3Events.listen();
-        ManagementBot.start();
+    public static void start() {
+        sql_.connect();
+        Events.startListen();
+    }
+
+    public static void stop() {
+        Events.stopListen();
+        sql_.disconnect();
     }
 
     public static Logger getLogger() {
