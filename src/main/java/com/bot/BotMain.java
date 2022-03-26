@@ -14,6 +14,8 @@ public class BotMain {
     private static MySQL sql_ = new MySQL(log_, "databaseURL", "databaseUsername", "databasePassword");
 
     public static void main(String[] args) {
+        sql_.connect();
+        TS3Constants.initialize();
         TS3Connection.connect();
         TS3Events.listen();
         ManagementBot.start();
