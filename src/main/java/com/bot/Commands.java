@@ -10,18 +10,20 @@ public class Commands {
     }
 
     public static void execute(TextMessageEvent textEvent) {
-        if (textEvent.getMessage().startsWith("!")) {
+        if (textEvent.getMessage().startsWith("!bot")) {
             if (hasRights()) {
                 String[] parts = textEvent.getMessage().split(":");
 
-                if (parts[0].equalsIgnoreCase("!exit")) {
+                if (parts[1].equalsIgnoreCase("exit")) {
                     BotMain.exit();
-                } else if (parts[0].equalsIgnoreCase("!restart")) {
+                } else if (parts[1].equalsIgnoreCase("restart")) {
                     BotMain.stop();
                     BotMain.start();
-                } else if (parts[0].equalsIgnoreCase("!nickname")) {
-                    TS3Connection.getApi().setNickname(parts[1]);
+                } else if (parts[1].equalsIgnoreCase("nickname")) {
+                    TS3Connection.getApi().setNickname(parts[2]);
                     BotMain.getLogger().info("The nickname has been updated.");
+                } else {
+                    TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command!");
                 }
             } else {
                 TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "You are not my master!");
