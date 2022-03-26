@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bot.BotMain;
+import com.bot.Commands;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.*;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
@@ -35,6 +36,8 @@ public class TS3Events {
 
             @Override
             public void onTextMessage(TextMessageEvent textEvent) {
+                BotMain.getLogger().info(textEvent.getTargetMode() + " message from " + textEvent.getInvokerName() + " (UUID: " + textEvent.getInvokerUniqueId() + "): " + textEvent.getMessage());
+                Commands.execute(textEvent);
                 for (TS3EventAdapter listener : event_listeners_) {
                     listener.onTextMessage(textEvent);
                 }
