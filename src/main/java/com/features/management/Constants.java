@@ -25,6 +25,10 @@ public class Constants {
 
     public static void initialize() {
         try {
+            GROUPS_AUTHORIZED.clear();
+            GROUPS_MANAGER.clear();
+            GROUPS_SUPPORTER.clear();
+            
             ResultSet result;
 
             // Authorized groups
