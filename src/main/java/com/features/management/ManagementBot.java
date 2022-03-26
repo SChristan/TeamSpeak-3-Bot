@@ -14,7 +14,10 @@ public class ManagementBot {
 
     public static void start() {
         sql_.connect();
+        Constants.initialize();
+        ActivityDisplay.updateManagerClients();
         Events.startListen();
+        ActivityDisplay.updateChannelDescription(Types.IS_MANAGER_AND_SUPPORTER);
     }
 
     public static void stop() {
