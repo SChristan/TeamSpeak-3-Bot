@@ -1,5 +1,6 @@
-package com.bot;
+package com.TS3;
 
+import com.bot.BotMain;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;

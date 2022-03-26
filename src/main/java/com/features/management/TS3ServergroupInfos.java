@@ -2,7 +2,7 @@ package com.features.management;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bot.TS3Connection;
+import com.TS3.TS3Connection;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
 
 public class TS3ServergroupInfos {

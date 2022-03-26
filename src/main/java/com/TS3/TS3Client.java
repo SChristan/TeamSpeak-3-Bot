@@ -1,4 +1,4 @@
-package com.bot;
+package com.TS3;
 
 import com.features.management.Types;
 

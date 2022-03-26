@@ -1,8 +1,8 @@
 package com.features.management;
 
-import com.bot.TS3Constants;
-import com.bot.TS3Events;
-import com.bot.TS3Infos;
+import com.TS3.TS3Constants;
+import com.TS3.TS3Events;
+import com.TS3.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientMovedEvent;
