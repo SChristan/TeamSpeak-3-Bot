@@ -11,6 +11,7 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 public class TS3Events {
 
     private static TS3Api api_ = TS3Connection.getApi();
+    private static TS3EventAdapter event_adapter_;
     private static List<TS3EventAdapter> event_listeners_ = new ArrayList<TS3EventAdapter>();
 
     public static void addListener(TS3EventAdapter listener) {
@@ -21,8 +22,16 @@ public class TS3Events {
         event_listeners_.remove(listener);
     }
 
-    public static void listen() {
-        api_.addTS3Listeners(new TS3EventAdapter() {
+    public static void startListen() {
+        createEventAdapter();
+        api_.addTS3Listeners(event_adapter_);
+    }
+
+    public static void stopListen() {
+        api_.removeTS3Listeners(event_adapter_);
+    }
+    public static void createEventAdapter() {
+        event_adapter_ = new TS3EventAdapter() {
 
             @Override
             public void onTextMessage(TextMessageEvent textEvent) {
@@ -114,6 +123,6 @@ public class TS3Events {
                     listener.onPrivilegeKeyUsed(privilegeKeyUsedEvent);
                 }
             }
-        });
+        };
     }
 }
