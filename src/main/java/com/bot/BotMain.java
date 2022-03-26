@@ -12,16 +12,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BotMain {
-    
+
     private static final Logger log_ = LoggerFactory.getLogger(BotMain.class);
     private static MySQL sql_ = new MySQL(log_, "databaseURL", "databaseUsername", "databasePassword");
 
     public static void main(String[] args) {
+        start();
+    }
+
+    public static void start() {
         sql_.connect();
         TS3Constants.initialize();
         TS3Connection.connect();
-        TS3Events.listen();
+        TS3Events.startListen();
         ManagementBot.start();
+        log_.info("The bot was started.");
+    }
+
+    public static void stop() {
+        ManagementBot.stop();
+        TS3Events.stopListen();
+        TS3Connection.disconnect();
+        sql_.disconnect();
+        log_.info("The bot was stopped.");
+    }
+
+    public static void exit() {
+        stop();
+        log_.info("The system will be terminated.");
+        System.exit(0);
     }
 
     public static Logger getLogger() {
