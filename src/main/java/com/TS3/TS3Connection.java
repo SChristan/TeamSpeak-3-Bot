@@ -1,10 +1,13 @@
 package com.TS3;
 
+import java.util.Collections;
+
 import com.bot.BotMain;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.TS3Query.FloodRate;
+import com.github.theholywaffle.teamspeak3.api.ClientProperty;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventType;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ConnectionHandler;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
@@ -51,6 +54,9 @@ public class TS3Connection {
 		query_ = new TS3Query(config_);
 		api_ = query_.getApi();
 		query_.connect();
+
+        TS3Connection.getApi().editClient(TS3Connection.getApi().whoAmI().getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, TS3Constants.VERSION));
+
 		BotMain.getLogger().info("TS3Query has connected to the Teamspeak server.");
 	}
 }
