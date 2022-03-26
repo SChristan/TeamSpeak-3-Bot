@@ -20,6 +20,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.hierynomus</groupId>
+                    <artifactId>sshj</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -49,7 +53,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.TS3Bot.BotMain</mainClass>
+                            <mainClass>com.bot.BotMain</mainClass>
                             <classpathPrefix>dependencys</classpathPrefix>
                         </manifest>
                     </archive>
