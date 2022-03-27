@@ -46,7 +46,7 @@ public class Events {
                         activity_status = Types.IS_AFK;
                     }
                     ActivityDisplay.getManagerClients().get(joinEvent.getUniqueClientIdentifier()).setActivityStatus(activity_status);
-                    ActivityDisplay.updateChannelDescription(ActivityDisplay.getClientRole(client));
+                    ChannelDescription.update(ActivityDisplay.getClientRole(client));
 
                     ManagementBot.getLogger().info(client.getNickname() + " joined the server.");
                 }
@@ -58,7 +58,7 @@ public class Events {
                 String unique_identifier = client.getUniqueIdentifier();
                 if (ActivityDisplay.getManagerClients().containsKey(unique_identifier)) {
                     ActivityDisplay.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_OFFLINE);
-                    ActivityDisplay.updateChannelDescription(ActivityDisplay.getClientRole(client));
+                    ChannelDescription.update(ActivityDisplay.getClientRole(client));
 
                     ManagementBot.getLogger().info(client.getNickname() + " left the server.");
                 }
@@ -71,7 +71,7 @@ public class Events {
                 int channel_target_id = movedEvent.getTargetChannelId();
                 if (ActivityDisplay.getManagerClients().containsKey(unique_identifier) && (channel_target_id == TS3Constants.CHANNEL_ID_AFK_SHORT || channel_target_id == TS3Constants.CHANNEL_ID_AFK_LONG)) {
                     ActivityDisplay.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_AFK);
-                    ActivityDisplay.updateChannelDescription(ActivityDisplay.getClientRole(client));
+                    ChannelDescription.update(ActivityDisplay.getClientRole(client));
 					ActivityDisplay.getManagerAFK().add(unique_identifier);
 
                     ManagementBot.getLogger().info(client.getNickname() + " is now AFK.");
@@ -79,7 +79,7 @@ public class Events {
 
                 if (ActivityDisplay.getManagerAFK().contains(unique_identifier) && !(channel_target_id == TS3Constants.CHANNEL_ID_AFK_SHORT || channel_target_id == TS3Constants.CHANNEL_ID_AFK_LONG)) {
 					ActivityDisplay.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_ONLINE);
-                    ActivityDisplay.updateChannelDescription(ActivityDisplay.getClientRole(client));
+                    ChannelDescription.update(ActivityDisplay.getClientRole(client));
 					ActivityDisplay.getManagerAFK().remove(unique_identifier);
 
                     ManagementBot.getLogger().info(client.getNickname() + " isn't AFK anymore.");

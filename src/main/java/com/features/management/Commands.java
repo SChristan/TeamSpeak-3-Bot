@@ -15,9 +15,9 @@ public class Commands {
                 String[] parts = textEvent.getMessage().split(":");
 
                 if (parts[1].equalsIgnoreCase("reload")) {
-                    Constants.initialize();
+                    ActivityDisplay.loadGroups();
                     ActivityDisplay.updateManagerClients();
-                    ActivityDisplay.updateChannelDescription(Types.IS_MANAGER_AND_SUPPORTER);
+                    ChannelDescription.update(Types.IS_MANAGER_AND_SUPPORTER);
                 } else if (parts[1].equalsIgnoreCase("restart")) {
                     ManagementBot.stop();
                     ManagementBot.start();

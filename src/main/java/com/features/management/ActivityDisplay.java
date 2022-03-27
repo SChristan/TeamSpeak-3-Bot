@@ -1,20 +1,22 @@
 package com.features.management;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.TS3.TS3Client;
-import com.TS3.TS3Connection;
-import com.TS3.TS3Constants;
-import com.github.theholywaffle.teamspeak3.api.ChannelProperty;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
 
 public class ActivityDisplay {
     
     private static HashMap<String, TS3Client> manager_clients_ = new HashMap<String, TS3Client>();
-	public static ArrayList<String> manager_afk_ = new ArrayList<>();
+	private static ArrayList<String> manager_afk_ = new ArrayList<>();
+    private static List<Integer> authorized_groups_ = new ArrayList<>();
+    private static List<TS3ServergroupInfos> manager_groups_ = new ArrayList<>();
+    private static List<TS3ServergroupInfos> supporter_groups_ = new ArrayList<>();
 
     public static HashMap<String, TS3Client> getManagerClients() {
         return manager_clients_;
@@ -22,6 +24,18 @@ public class ActivityDisplay {
 
     public static ArrayList<String> getManagerAFK() {
         return manager_afk_;
+    }
+
+    public static List<Integer> getAuthorizedGroups() {
+        return authorized_groups_;
+    }
+
+    public static List<TS3ServergroupInfos> getManagerGroups() {
+        return manager_groups_;
+    }
+
+    public static List<TS3ServergroupInfos> getSupporterGroups() {
+        return supporter_groups_;
     }
 
 	public static Types getClientRole(Client client) {
@@ -37,7 +51,7 @@ public class ActivityDisplay {
 	}
 
     private static Boolean isManager(Client client) {
-        for (TS3ServergroupInfos group : Constants.getManagerGroups()) {
+        for (TS3ServergroupInfos group : ActivityDisplay.getManagerGroups()) {
             if (client.isInServerGroup(group.getID()))
                 return true;
         }
@@ -45,7 +59,7 @@ public class ActivityDisplay {
     }
 
     private static Boolean isSupporter(Client client) {
-        for (TS3ServergroupInfos group : Constants.getSupporterGroups()) {
+        for (TS3ServergroupInfos group : ActivityDisplay.getSupporterGroups()) {
             if (client.isInServerGroup(group.getID()))
                 return true;
         }
@@ -54,14 +68,14 @@ public class ActivityDisplay {
 
     public static void updateManagerClients() {
         manager_clients_.clear();
-        for (TS3ServergroupInfos servergroup : Constants.getManagerGroups()) {
+        for (TS3ServergroupInfos servergroup : ActivityDisplay.getManagerGroups()) {
             servergroup.updateClients();
             for (ServerGroupClient client : servergroup.getSGClients()) {
                 TS3Client ts3_client = new TS3Client(client.getNickname(), client.getUniqueIdentifier());
                 manager_clients_.put(client.getUniqueIdentifier(), ts3_client);
             }
         }
-        for (TS3ServergroupInfos servergroup : Constants.getSupporterGroups()) {
+        for (TS3ServergroupInfos servergroup : ActivityDisplay.getSupporterGroups()) {
             servergroup.updateClients();
             for (ServerGroupClient client : servergroup.getSGClients()) {
                 TS3Client ts3_client = new TS3Client(client.getNickname(), client.getUniqueIdentifier());
@@ -71,40 +85,36 @@ public class ActivityDisplay {
         ManagementBot.getLogger().info("The manager list has been updated.");
     }
 
-    public static String getDescription(List<TS3ServergroupInfos> group) {
-        String description = "";
-        for (TS3ServergroupInfos servergroup : group) {
-            String online_url = "";
-            String afk_url = "";
-            String offline_url = "";
+    public static void loadGroups() {
+        try {
+            authorized_groups_.clear();
+            manager_groups_.clear();
+            supporter_groups_.clear();
 
-            for (ServerGroupClient client : servergroup.getSGClients()) {
-                TS3Client ts3_client = manager_clients_.get(client.getUniqueIdentifier());
-                Types activity_status = ts3_client.getActivityStatus();
-                if (activity_status == Types.IS_ONLINE) {
-                    online_url = online_url + "→ [COLOR=GREEN][B][ON][/B][/COLOR] " + ts3_client.getURL() + "\n";
-                } else if (activity_status == Types.IS_AFK) {
-                    afk_url = afk_url + "→ [COLOR=#FFD100][B][AFK][/B][/COLOR] " + ts3_client.getURL() + "\n";
-                } else if (activity_status == Types.IS_OFFLINE) {
-                    offline_url = offline_url + "→ [COLOR=RED][B][OFF][/B][/COLOR] " + ts3_client.getURL() + "\n";
-                }
+            ResultSet result;
+
+            // Authorized groups
+            result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM verified_servergroups");
+            while (result.next()) {
+                authorized_groups_.add(result.getInt("group_id"));
             }
-            if (servergroup.getSGClients().size() == 0)
-            online_url = "[B]    [COLOR=BLACK]-TBD-[/COLOR][/B]\n";
 
-            description = description + servergroup.getTitle() + online_url + afk_url + offline_url + "\n";
+            // Manager
+            result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='manager' ORDER BY sort ASC");
+            while (result.next()) {
+                manager_groups_.add(new TS3ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
+            }
+
+            // Supporter
+            result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='supporter' ORDER BY sort ASC");
+            while (result.next()) {
+                supporter_groups_.add(new TS3ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
+            }
+
+            result.close();
+            ManagementBot.getLogger().info("Groups were initialised.");
+        } catch (SQLException e) {
+            ManagementBot.getLogger().error("Exception in Constants initialize():", e);
         }
-        return description;
-    }
-
-    public static void updateChannelDescription(Types type) {
-        if (type == Types.IS_MANAGER_AND_SUPPORTER) {
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(Constants.getManagerGroups()));
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(Constants.getSupporterGroups()));
-		} else if (type == Types.IS_MANAGER) {
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(Constants.getManagerGroups()));
-		} else if (type == Types.IS_SUPPORTER) {
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(Constants.getSupporterGroups()));
-		}
     }
 }
