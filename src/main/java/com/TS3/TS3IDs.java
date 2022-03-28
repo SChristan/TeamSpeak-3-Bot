@@ -12,21 +12,21 @@ public class TS3IDs {
 
     // Config
     public static String HOSTNAME;
-	public static int PORT;
-	public static String QUERY_LOGIN;
-	public static String QUERY_PASSWORD;
-	public static String BOT_NICKNAME;
-	public static boolean ENABLE_COMMUNICATIONS_LOGGING;
+    public static int PORT;
+    public static String QUERY_LOGIN;
+    public static String QUERY_PASSWORD;
+    public static String BOT_NICKNAME;
+    public static boolean ENABLE_COMMUNICATIONS_LOGGING;
 
     // Channel IDs
-	public static int CHANNEL_ID_MC;            // "Management Mitglieder"
-	public static int CHANNEL_ID_SC;            // "Supportansprechpartner"
-	public static int CHANNEL_ID_WABE;          // "Warten auf Bewerbungsgespräch"
-	public static int CHANNEL_ID_WAMM;          // "Warten auf Management"
-	public static int CHANNEL_ID_AFK_SHORT;     // "Kurz AFK"
-	public static int CHANNEL_ID_AFK_LONG;      // "Lang AFK"
+    public static int CHANNEL_ID_MC; // "Management Mitglieder"
+    public static int CHANNEL_ID_SC; // "Supportansprechpartner"
+    public static int CHANNEL_ID_WABE; // "Warten auf Bewerbungsgespräch"
+    public static int CHANNEL_ID_WAMM; // "Warten auf Management"
+    public static int CHANNEL_ID_AFK_SHORT; // "Kurz AFK"
+    public static int CHANNEL_ID_AFK_LONG; // "Lang AFK"
 
-    public static void initialize() {
+    public static void load() {
         try {
             ResultSet result;
 
@@ -43,7 +43,7 @@ public class TS3IDs {
             QUERY_PASSWORD = config_map_.get("query_password");
             BOT_NICKNAME = config_map_.get("bot_nickname");
             ENABLE_COMMUNICATIONS_LOGGING = Boolean.parseBoolean(config_map_.get("enable_communications_logging"));
-            
+
             // Channel IDs
             HashMap<String, Integer> channelID_map = new HashMap<String, Integer>();
             result = BotMain.getSQLStatement().executeQuery("SELECT * FROM channel_ids");
@@ -63,5 +63,5 @@ public class TS3IDs {
         } catch (NumberFormatException | SQLException e) {
             BotMain.getLogger().error("Exception in TS3Constants initialize():", e);
         }
-	}
+    }
 }

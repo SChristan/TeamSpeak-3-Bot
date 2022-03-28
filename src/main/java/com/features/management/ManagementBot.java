@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class ManagementBot {
 
     private static final Logger log_ = LoggerFactory.getLogger(ManagementBot.class);
-    private static MySQL sql_ = new MySQL(log_, "databaseURL", "databaseUsername", "databasePassword");
+    private static MySQL sql_ = new MySQL(log_, "databaseURL_management", "databaseUsername_management", "databasePassword_management");
 
     public static void start() {
         sql_.connect();
