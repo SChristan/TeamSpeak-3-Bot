@@ -2,11 +2,11 @@ package com.bot;
 
 import java.sql.Statement;
 
+import com.MySQL;
 import com.TS3.TS3Connection;
 import com.TS3.TS3IDs;
 import com.TS3.TS3Events;
 import com.features.management.ManagementBot;
-import com.mysql.MySQL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

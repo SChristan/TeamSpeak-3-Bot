@@ -2,7 +2,7 @@ package com.features.management;
 
 import java.sql.Statement;
 
-import com.mysql.MySQL;
+import com.MySQL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
