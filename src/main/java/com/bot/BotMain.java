@@ -23,6 +23,7 @@ public class BotMain {
     public static void start() {
         sql_.connect();
         TS3IDs.load();
+        Commands.loadAuthorizedGroups();
         TS3Connection.connect();
         TS3Events.startListen();
         ManagementBot.start();

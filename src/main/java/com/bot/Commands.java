@@ -1,15 +1,33 @@
 package com.bot;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.TS3.TS3Connection;
 import com.TS3.TS3Infos;
-import com.features.management.ActivityDisplay;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 
 public class Commands {
 
+    private static List<Integer> authorized_groups_ = new ArrayList<>();
+
+    public static void loadAuthorizedGroups() {
+        try {
+            authorized_groups_.clear();
+            ResultSet result = BotMain.getSQLStatement().executeQuery("SELECT * FROM verified_servergroups");
+            while (result.next()) {
+                authorized_groups_.add(result.getInt("group_id"));
+            }
+        } catch (SQLException e) {
+            BotMain.getLogger().error("Exception in Commands loadAuthorizedGroups():", e);
+        }
+    }
+
     private static Boolean hasRights(Client client) {
-        for (int group_id : ActivityDisplay.getAuthorizedGroups()) {
+        for (int group_id : authorized_groups_) {
             if (client.isInServerGroup(group_id)) {
                 return true;
             }
