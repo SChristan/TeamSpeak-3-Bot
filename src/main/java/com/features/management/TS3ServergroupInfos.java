@@ -1,4 +1,5 @@
 package com.features.management;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,11 @@ public class TS3ServergroupInfos {
     private int id_;
     private String title_;
     private List<ServerGroupClient> sg_clients_ = new ArrayList<>();
+    private boolean clients_initialized = false;
 
     public TS3ServergroupInfos(int servergroup_id, String title) {
         this.id_ = servergroup_id;
         this.title_ = title;
-        updateClients();
     }
 
     public int getID() {
@@ -26,6 +27,9 @@ public class TS3ServergroupInfos {
     }
 
     public List<ServerGroupClient> getSGClients() {
+        if (!clients_initialized) {
+            updateClients();
+        }
         return sg_clients_;
     }
 
@@ -34,5 +38,6 @@ public class TS3ServergroupInfos {
         for (ServerGroupClient sg_client : TS3Connection.getApi().getServerGroupClients(id_)) {
             sg_clients_.add(sg_client);
         }
+        clients_initialized = true;
     }
 }
