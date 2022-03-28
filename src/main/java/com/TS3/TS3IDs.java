@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import com.bot.BotMain;
 
-public class TS3Constants {
+public class TS3IDs {
     // Code version
     public static String VERSION = "Version 1.0.0";
 

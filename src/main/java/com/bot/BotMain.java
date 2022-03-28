@@ -3,7 +3,7 @@ package com.bot;
 import java.sql.Statement;
 
 import com.TS3.TS3Connection;
-import com.TS3.TS3Constants;
+import com.TS3.TS3IDs;
 import com.TS3.TS3Events;
 import com.features.management.ManagementBot;
 import com.mysql.MySQL;
@@ -22,7 +22,7 @@ public class BotMain {
 
     public static void start() {
         sql_.connect();
-        TS3Constants.initialize();
+        TS3IDs.initialize();
         TS3Connection.connect();
         TS3Events.startListen();
         ManagementBot.start();

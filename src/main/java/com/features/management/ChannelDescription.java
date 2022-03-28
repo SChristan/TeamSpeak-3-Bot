@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.TS3.TS3Client;
 import com.TS3.TS3Connection;
-import com.TS3.TS3Constants;
+import com.TS3.TS3IDs;
 import com.github.theholywaffle.teamspeak3.api.ChannelProperty;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
 
@@ -38,12 +38,12 @@ public class ChannelDescription {
 
     public static void update(Types type) {
         if (type == Types.IS_MANAGER_AND_SUPPORTER) {
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getManagerGroups()));
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getSupporterGroups()));
+            TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getManagerGroups()));
+            TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getSupporterGroups()));
     	} else if (type == Types.IS_MANAGER) {
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getManagerGroups()));
+            TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getManagerGroups()));
     	} else if (type == Types.IS_SUPPORTER) {
-            TS3Connection.getApi().editChannel(TS3Constants.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getSupporterGroups()));
+            TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION, getDescription(ActivityDisplay.getSupporterGroups()));
     	}
     }
 }
