@@ -57,11 +57,13 @@ public class TS3Events {
 
             @Override
             public void onClientLeave(ClientLeaveEvent leaveEvent) {
-                for (TS3EventAdapter listener : event_listeners_) {
-                    listener.onClientLeave(leaveEvent);
+                if (TS3Infos.getOnlineClients().containsKey(leaveEvent.getClientId())) {
+                    for (TS3EventAdapter listener : event_listeners_) {
+                        listener.onClientLeave(leaveEvent);
+                    }
+                    TS3Infos.removeOnlineClient(leaveEvent.getClientId());
+                    BotMain.getLogger().debug("Client went offline: " + leaveEvent.getClientId());
                 }
-                TS3Infos.removeOnlineClient(leaveEvent.getClientId());
-                BotMain.getLogger().debug("Client went offline: " + leaveEvent.getClientId());
             }
 
             @Override
