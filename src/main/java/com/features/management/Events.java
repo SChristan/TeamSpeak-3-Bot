@@ -1,6 +1,7 @@
 package com.features.management;
 
 import com.TS3.TS3IDs;
+import com.Types;
 import com.TS3.TS3Events;
 import com.TS3.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;

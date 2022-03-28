@@ -1,6 +1,6 @@
 package com.TS3;
 
-import com.features.management.Types;
+import com.Types;
 
 public class TS3Client {
 

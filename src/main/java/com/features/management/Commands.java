@@ -1,5 +1,6 @@
 package com.features.management;
 
+import com.Types;
 import com.TS3.TS3Connection;
 import com.TS3.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;

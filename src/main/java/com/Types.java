@@ -1,4 +1,4 @@
-package com.features.management;
+package com;
 
 public enum Types {
 	IS_ONLINE,
