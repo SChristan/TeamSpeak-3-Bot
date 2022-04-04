@@ -21,6 +21,7 @@ public class Commands {
             while (result.next()) {
                 authorized_groups_.add(result.getInt("group_id"));
             }
+            result.close();
         } catch (SQLException e) {
             BotMain.getLogger().error("Exception in Commands loadAuthorizedGroups():", e);
         }
