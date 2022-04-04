@@ -6,7 +6,7 @@ import com.MySQL;
 import com.TS3.TS3Connection;
 import com.TS3.TS3IDs;
 import com.TS3.TS3Events;
-import com.features.management.ManagementBot;
+import com.features.management.ActivityDisplayFeature;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +26,12 @@ public class BotMain {
         Commands.loadAuthorizedGroups();
         TS3Connection.connect();
         TS3Events.startListen();
-        ManagementBot.start();
+        ActivityDisplayFeature.start();
         log_.info("The bot was started.");
     }
 
     public static void stop() {
-        ManagementBot.stop();
+        ActivityDisplayFeature.stop();
         TS3Events.stopListen();
         TS3Connection.disconnect();
         sql_.disconnect();

@@ -1,4 +1,4 @@
-# "Management Mitglieder" Bot
+# Feature: ActivityDisplay
 ## Table of Contents
 1. [Database Information](#database-information)
    1. [Database Connection](#database-connection)

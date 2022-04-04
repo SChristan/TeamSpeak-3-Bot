@@ -32,8 +32,8 @@ public class Events {
                 if (textEvent.getMessage().startsWith("!management")) {
                     String[] parts = textEvent.getMessage().split(":");
                     if (parts[1].equalsIgnoreCase("exit")) {
-                        ManagementBot.stop();
-                        ManagementBot.getLogger().info("ManagementBot was stopped by the exit command.");
+                        ActivityDisplayFeature.stop();
+                        ActivityDisplayFeature.getLogger().info("ManagementBot was stopped by the exit command.");
                     }
                 }
             }
@@ -49,7 +49,7 @@ public class Events {
                     ActivityDisplay.getManagerClients().get(joinEvent.getUniqueClientIdentifier()).setActivityStatus(activity_status);
                     ChannelDescription.update(ActivityDisplay.getClientRole(client));
 
-                    ManagementBot.getLogger().info(client.getNickname() + " joined the server.");
+                    ActivityDisplayFeature.getLogger().info(client.getNickname() + " joined the server.");
                 }
             }
 
@@ -61,7 +61,7 @@ public class Events {
                     ActivityDisplay.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_OFFLINE);
                     ChannelDescription.update(ActivityDisplay.getClientRole(client));
 
-                    ManagementBot.getLogger().info(client.getNickname() + " left the server.");
+                    ActivityDisplayFeature.getLogger().info(client.getNickname() + " left the server.");
                 }
             }
 
@@ -75,7 +75,7 @@ public class Events {
                     ChannelDescription.update(ActivityDisplay.getClientRole(client));
 					ActivityDisplay.getManagerAFK().add(unique_identifier);
 
-                    ManagementBot.getLogger().info(client.getNickname() + " is now AFK.");
+                    ActivityDisplayFeature.getLogger().info(client.getNickname() + " is now AFK.");
                 }
 
                 if (ActivityDisplay.getManagerAFK().contains(unique_identifier) && !(channel_target_id == TS3IDs.CHANNEL_ID_AFK_SHORT || channel_target_id == TS3IDs.CHANNEL_ID_AFK_LONG)) {
@@ -83,7 +83,7 @@ public class Events {
                     ChannelDescription.update(ActivityDisplay.getClientRole(client));
 					ActivityDisplay.getManagerAFK().remove(unique_identifier);
 
-                    ManagementBot.getLogger().info(client.getNickname() + " isn't AFK anymore.");
+                    ActivityDisplayFeature.getLogger().info(client.getNickname() + " isn't AFK anymore.");
 				}
             }
         };
