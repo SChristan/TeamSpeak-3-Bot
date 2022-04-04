@@ -15,6 +15,7 @@ public class ManagementBot {
 
     public static void start() {
         sql_.connect();
+        Commands.loadAuthorizedGroups();
         ActivityDisplay.loadGroups();
         ActivityDisplay.updateManagerClients();
         Events.startListen();
