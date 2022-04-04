@@ -1,7 +1,7 @@
 <configuration>
   <!-- Constants -->
-  <timestamp key="timestamp_day" datePattern="yyyy-MM-dd"/>
-  <property name="encoder_pattern" value="%d{HH:mm:ss.SSS} [%thread] [%level] - %msg%n"/>
+  <timestamp key="timestamp_day" datePattern="yyyy-MM"/>
+  <property name="encoder_pattern" value="%d{HH:mm:ss.SSS} [%level] - %msg%n"/>
   <property name="level" value="DEBUG"/>
   <property name="append" value="FALSE"/>
 
@@ -35,14 +35,14 @@
         <appender-ref ref="BOT_MAIN_LOGGER"/>
   </logger>
 
-  <!-- Management-Bot Logger -->
-  <appender name="MANAGEMENT_BOT_LOGGER" class="ch.qos.logback.core.FileAppender">
-    <file>log/management_${timestamp_day}.log</file>
+  <!-- ActivityDisplay-Feature Logger -->
+  <appender name="ACTIVITY_DISPLAY_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/activity_${timestamp_day}.log</file>
     <append>${append}</append>
     <encoder><pattern>${encoder_pattern}</pattern></encoder>
   </appender>
-  <logger name="com.features.management.ManagementBot" level="${level}" additivity="TRUE">
-        <appender-ref ref="MANAGEMENT_BOT_LOGGER"/>
+  <logger name="com.features.activitydisplay.ActivityDisplayFeature" level="${level}" additivity="TRUE">
+        <appender-ref ref="ACTIVITY_DISPLAY_LOGGER"/>
   </logger>
 
 </configuration>
