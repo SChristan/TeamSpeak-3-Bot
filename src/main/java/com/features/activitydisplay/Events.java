@@ -1,4 +1,4 @@
-package com.features.management;
+package com.features.activitydisplay;
 
 import com.TS3.TS3IDs;
 import com.Types;

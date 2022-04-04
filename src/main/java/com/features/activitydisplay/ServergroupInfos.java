@@ -1,4 +1,4 @@
-package com.features.management;
+package com.features.activitydisplay;
 
 import java.util.ArrayList;
 import java.util.List;

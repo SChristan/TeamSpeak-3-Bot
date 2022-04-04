@@ -1,4 +1,4 @@
-package com.features.management;
+package com.features.activitydisplay;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
