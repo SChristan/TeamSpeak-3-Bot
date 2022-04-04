@@ -3,8 +3,7 @@
 1. [Database Information](#database-information)
    1. [Database Connection](#database-connection)
    1. [Database Structure](#database-structure)
-      1. [Authorized Servergroups](#bot-controlling-servergroups)
-      1. [Channel-IDs](#channel-ids)
+      1. [Authorized Servergroups](#authorized-servergroups)
       1. [ON/OFF Channel Description](#onoff-channel-description)
 1. [Logging](#logging)
 
@@ -19,7 +18,7 @@ databasePassword_management=<password>
 
 ### Database Structure
 #### Authorized Servergroups
-The Teamseak ServerGroups, which are allowed to controll the bot via direct messages, are loaded from the database table `verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
+The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
 
 #### ON/OFF Channel Description
 The shape of the channel descriptions are loaded from the database table `channeldescription_content`. It needs four columns as shown below.
@@ -38,6 +37,6 @@ Example:
 `2` | `456` | `supporter` | `[b]Manager[/b]`
 
 ## Logging
-The logging framework for this application is Logback.
+The logging framework for this application is Logback. The properties are defined in the global **logback.xml** file.
 
-At startup, the application creates a new logfile in the directory **logs**, for this feature. There are several information, which are logged at any time (i.e. on events) during the runtime of the application.
+The feature should write all information in a separate logfile in the directory **logs**. The log messages can be appended to the parent logger. There are several information, which are logged at any time during the runtime of the application.
