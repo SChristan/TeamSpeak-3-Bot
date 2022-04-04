@@ -11,7 +11,7 @@ import com.TS3.TS3Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
 
-public class ActivityDisplay {
+public class Utility {
     
     private static HashMap<String, TS3Client> manager_clients_ = new HashMap<String, TS3Client>();
 	private static ArrayList<String> manager_afk_ = new ArrayList<>();
@@ -47,7 +47,7 @@ public class ActivityDisplay {
 	}
 
     private static Boolean isManager(Client client) {
-        for (ServergroupInfos group : ActivityDisplay.getManagerGroups()) {
+        for (ServergroupInfos group : Utility.getManagerGroups()) {
             if (client.isInServerGroup(group.getID()))
                 return true;
         }
@@ -55,7 +55,7 @@ public class ActivityDisplay {
     }
 
     private static Boolean isSupporter(Client client) {
-        for (ServergroupInfos group : ActivityDisplay.getSupporterGroups()) {
+        for (ServergroupInfos group : Utility.getSupporterGroups()) {
             if (client.isInServerGroup(group.getID()))
                 return true;
         }
@@ -64,14 +64,14 @@ public class ActivityDisplay {
 
     public static void updateManagerClients() {
         manager_clients_.clear();
-        for (ServergroupInfos servergroup : ActivityDisplay.getManagerGroups()) {
+        for (ServergroupInfos servergroup : Utility.getManagerGroups()) {
             servergroup.updateClients();
             for (ServerGroupClient client : servergroup.getSGClients()) {
                 TS3Client ts3_client = new TS3Client(client.getNickname(), client.getUniqueIdentifier());
                 manager_clients_.put(client.getUniqueIdentifier(), ts3_client);
             }
         }
-        for (ServergroupInfos servergroup : ActivityDisplay.getSupporterGroups()) {
+        for (ServergroupInfos servergroup : Utility.getSupporterGroups()) {
             servergroup.updateClients();
             for (ServerGroupClient client : servergroup.getSGClients()) {
                 TS3Client ts3_client = new TS3Client(client.getNickname(), client.getUniqueIdentifier());

@@ -19,7 +19,7 @@ public class ChannelDescription {
             String offline_url = "";
 
             for (ServerGroupClient client : servergroup.getSGClients()) {
-                TS3Client ts3_client = ActivityDisplay.getManagerClients().get(client.getUniqueIdentifier());
+                TS3Client ts3_client = Utility.getManagerClients().get(client.getUniqueIdentifier());
                 Types activity_status = ts3_client.getActivityStatus();
                 if (activity_status == Types.IS_ONLINE) {
                     online_url = online_url + "→ [COLOR=GREEN][B][ON][/B][/COLOR] " + ts3_client.getURL() + "\n";
@@ -41,15 +41,15 @@ public class ChannelDescription {
     public static void update(Types type) {
         if (type == Types.IS_MANAGER_AND_SUPPORTER) {
             TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION,
-                    getDescription(ActivityDisplay.getManagerGroups()));
+                    getDescription(Utility.getManagerGroups()));
             TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION,
-                    getDescription(ActivityDisplay.getSupporterGroups()));
+                    getDescription(Utility.getSupporterGroups()));
         } else if (type == Types.IS_MANAGER) {
             TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_MC, ChannelProperty.CHANNEL_DESCRIPTION,
-                    getDescription(ActivityDisplay.getManagerGroups()));
+                    getDescription(Utility.getManagerGroups()));
         } else if (type == Types.IS_SUPPORTER) {
             TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_SC, ChannelProperty.CHANNEL_DESCRIPTION,
-                    getDescription(ActivityDisplay.getSupporterGroups()));
+                    getDescription(Utility.getSupporterGroups()));
         }
     }
 }

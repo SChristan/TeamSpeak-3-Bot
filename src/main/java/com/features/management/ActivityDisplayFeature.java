@@ -16,8 +16,8 @@ public class ActivityDisplayFeature {
     public static void start() {
         sql_.connect();
         Commands.loadAuthorizedGroups();
-        ActivityDisplay.loadGroups();
-        ActivityDisplay.updateManagerClients();
+        Utility.loadGroups();
+        Utility.updateManagerClients();
         Events.startListen();
         ChannelDescription.update(Types.IS_MANAGER_AND_SUPPORTER);
     }
