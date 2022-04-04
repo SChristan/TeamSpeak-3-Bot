@@ -15,8 +15,8 @@ public class ActivityDisplay {
     
     private static HashMap<String, TS3Client> manager_clients_ = new HashMap<String, TS3Client>();
 	private static ArrayList<String> manager_afk_ = new ArrayList<>();
-    private static List<TS3ServergroupInfos> manager_groups_ = new ArrayList<>();
-    private static List<TS3ServergroupInfos> supporter_groups_ = new ArrayList<>();
+    private static List<ServergroupInfos> manager_groups_ = new ArrayList<>();
+    private static List<ServergroupInfos> supporter_groups_ = new ArrayList<>();
 
     public static HashMap<String, TS3Client> getManagerClients() {
         return manager_clients_;
@@ -26,11 +26,11 @@ public class ActivityDisplay {
         return manager_afk_;
     }
 
-    public static List<TS3ServergroupInfos> getManagerGroups() {
+    public static List<ServergroupInfos> getManagerGroups() {
         return manager_groups_;
     }
 
-    public static List<TS3ServergroupInfos> getSupporterGroups() {
+    public static List<ServergroupInfos> getSupporterGroups() {
         return supporter_groups_;
     }
 
@@ -47,7 +47,7 @@ public class ActivityDisplay {
 	}
 
     private static Boolean isManager(Client client) {
-        for (TS3ServergroupInfos group : ActivityDisplay.getManagerGroups()) {
+        for (ServergroupInfos group : ActivityDisplay.getManagerGroups()) {
             if (client.isInServerGroup(group.getID()))
                 return true;
         }
@@ -55,7 +55,7 @@ public class ActivityDisplay {
     }
 
     private static Boolean isSupporter(Client client) {
-        for (TS3ServergroupInfos group : ActivityDisplay.getSupporterGroups()) {
+        for (ServergroupInfos group : ActivityDisplay.getSupporterGroups()) {
             if (client.isInServerGroup(group.getID()))
                 return true;
         }
@@ -64,14 +64,14 @@ public class ActivityDisplay {
 
     public static void updateManagerClients() {
         manager_clients_.clear();
-        for (TS3ServergroupInfos servergroup : ActivityDisplay.getManagerGroups()) {
+        for (ServergroupInfos servergroup : ActivityDisplay.getManagerGroups()) {
             servergroup.updateClients();
             for (ServerGroupClient client : servergroup.getSGClients()) {
                 TS3Client ts3_client = new TS3Client(client.getNickname(), client.getUniqueIdentifier());
                 manager_clients_.put(client.getUniqueIdentifier(), ts3_client);
             }
         }
-        for (TS3ServergroupInfos servergroup : ActivityDisplay.getSupporterGroups()) {
+        for (ServergroupInfos servergroup : ActivityDisplay.getSupporterGroups()) {
             servergroup.updateClients();
             for (ServerGroupClient client : servergroup.getSGClients()) {
                 TS3Client ts3_client = new TS3Client(client.getNickname(), client.getUniqueIdentifier());
@@ -91,13 +91,13 @@ public class ActivityDisplay {
             // Manager
             result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='manager' ORDER BY sort ASC");
             while (result.next()) {
-                manager_groups_.add(new TS3ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
+                manager_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
 
             // Supporter
             result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='supporter' ORDER BY sort ASC");
             while (result.next()) {
-                supporter_groups_.add(new TS3ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
+                supporter_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
 
             result.close();

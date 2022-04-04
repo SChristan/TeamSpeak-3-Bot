@@ -11,9 +11,9 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
 
 public class ChannelDescription {
 
-    public static String getDescription(List<TS3ServergroupInfos> group) {
+    public static String getDescription(List<ServergroupInfos> group) {
         String description = "";
-        for (TS3ServergroupInfos servergroup : group) {
+        for (ServergroupInfos servergroup : group) {
             String online_url = "";
             String afk_url = "";
             String offline_url = "";
