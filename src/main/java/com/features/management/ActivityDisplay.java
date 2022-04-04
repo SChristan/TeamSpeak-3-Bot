@@ -15,7 +15,6 @@ public class ActivityDisplay {
     
     private static HashMap<String, TS3Client> manager_clients_ = new HashMap<String, TS3Client>();
 	private static ArrayList<String> manager_afk_ = new ArrayList<>();
-    private static List<Integer> authorized_groups_ = new ArrayList<>();
     private static List<TS3ServergroupInfos> manager_groups_ = new ArrayList<>();
     private static List<TS3ServergroupInfos> supporter_groups_ = new ArrayList<>();
 
@@ -25,10 +24,6 @@ public class ActivityDisplay {
 
     public static ArrayList<String> getManagerAFK() {
         return manager_afk_;
-    }
-
-    public static List<Integer> getAuthorizedGroups() {
-        return authorized_groups_;
     }
 
     public static List<TS3ServergroupInfos> getManagerGroups() {
@@ -88,17 +83,10 @@ public class ActivityDisplay {
 
     public static void loadGroups() {
         try {
-            authorized_groups_.clear();
             manager_groups_.clear();
             supporter_groups_.clear();
 
             ResultSet result;
-
-            // Authorized groups
-            result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM verified_servergroups");
-            while (result.next()) {
-                authorized_groups_.add(result.getInt("group_id"));
-            }
 
             // Manager
             result = ManagementBot.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='manager' ORDER BY sort ASC");
