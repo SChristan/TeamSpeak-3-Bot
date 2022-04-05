@@ -6,7 +6,9 @@
       1. [Teamspeakserver Information](#teamspeakserver-information)
       1. [Authorized Servergroups](#authorized-servergroups)
       1. [Channel-IDs](#channel-ids)
-1. [Teamspeak Information](#teamspeak-information)
+1. [Teamspeak](#teamspeak)
+   1. [Provided Information](#provided-information)
+   1. [Events](#events)
 1. [Features](#features)
 1. [Logging](#logging)
 
@@ -48,8 +50,12 @@ The Channel-IDs are loaded as an **Integer** from the database table `channel_id
 `afk_short` | `<channel_id>` | Channel-ID of the short afk channel.
 `afk_long` | `<channel_id>` | Channel-ID of the long afk channel.
 
-## Teamspeak Information
-The bot provides various information about the teamspeak server, such as online clients and IDs. All features can use these information, but should not modify them.
+## Teamspeak
+### Provided Information
+The bot provides various information about the Teamspeak server, such as online clients and IDs. All features can use these information, but should not modify them.
+
+### Events
+The bot is connected to the Teamspeak server and receives events from the Teamspeak API, which can be subscribed by the features. The bot does not subscribe to all events of the API, but only those that are needed at the moment.
 
 ## Features
 You can add any features to this bot, which should implement a static `start()` and `stop()` method.
