@@ -45,6 +45,7 @@ public class Commands {
                 String[] parts = textEvent.getMessage().split(":");
 
                 if (parts[1].equalsIgnoreCase("reload")) {
+                    loadAuthorizedGroups();
                     Utility.loadGroups();
                     Utility.updateManagerClients();
                     ChannelDescription.update(Types.IS_MANAGER_AND_SUPPORTER);
