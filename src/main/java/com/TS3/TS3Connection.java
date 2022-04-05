@@ -55,8 +55,8 @@ public class TS3Connection {
 		api_ = query_.getApi();
 		query_.connect();
 
-        TS3Connection.getApi().editClient(TS3Connection.getApi().whoAmI().getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, TS3IDs.VERSION));
-
 		BotMain.getLogger().info("TS3Query has connected to the Teamspeak server.");
+
+        api_.editClient(api_.whoAmI().getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, TS3IDs.VERSION));
 	}
 }
