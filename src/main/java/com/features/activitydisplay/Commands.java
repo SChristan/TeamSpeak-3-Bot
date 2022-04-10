@@ -39,12 +39,14 @@ public class Commands {
     }
 
     public static void execute(TextMessageEvent textEvent) {
-        Client client = TS3Infos.getOnlineClients().get(textEvent.getInvokerId());
-        if (textEvent.getMessage().startsWith("!management")) {
+        String[] parts = textEvent.getMessage().split(":");
+        if (parts[0].equalsIgnoreCase("!ad")) {
+            Client client = TS3Infos.getOnlineClients().get(textEvent.getInvokerId());
             if (hasRights(client)) {
-                String[] parts = textEvent.getMessage().split(":");
-
-                if (parts[1].equalsIgnoreCase("reload")) {
+                if (parts[1].equalsIgnoreCase("exit")) {
+                    ActivityDisplay.stop();
+                    ActivityDisplay.getLogger().info("ActivityDisplay was stopped by the exit command.");
+                } else if (parts[1].equalsIgnoreCase("reload")) {
                     loadAuthorizedGroups();
                     Utility.loadGroups();
                     Utility.updateManagerClients();
@@ -52,8 +54,9 @@ public class Commands {
                 } else if (parts[1].equalsIgnoreCase("restart")) {
                     ActivityDisplay.stop();
                     ActivityDisplay.start();
+                    ActivityDisplay.getLogger().info("ActivityDisplay was restarted by the restart command.");
                 } else {
-                    TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command!");
+                    TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command.");
                 }
             } else {
                 TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "You are not my master!");

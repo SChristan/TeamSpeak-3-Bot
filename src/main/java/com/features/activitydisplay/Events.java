@@ -29,13 +29,7 @@ public class Events {
 
             @Override
             public void onTextMessage(TextMessageEvent textEvent) {
-                if (textEvent.getMessage().startsWith("!management")) {
-                    String[] parts = textEvent.getMessage().split(":");
-                    if (parts[1].equalsIgnoreCase("exit")) {
-                        ActivityDisplay.stop();
-                        ActivityDisplay.getLogger().info("ManagementBot was stopped by the exit command.");
-                    }
-                }
+                Commands.execute(textEvent);
             }
 
             @Override
