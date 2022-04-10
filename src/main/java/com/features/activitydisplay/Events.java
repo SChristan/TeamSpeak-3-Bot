@@ -55,13 +55,15 @@ public class Events {
 
             @Override
             public void onClientLeave(ClientLeaveEvent leaveEvent) {
-                Client client = TS3Infos.getOnlineClients().get(leaveEvent.getClientId());
-                String unique_identifier = client.getUniqueIdentifier();
-                if (Utility.getManagerClients().containsKey(unique_identifier)) {
-                    Utility.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_OFFLINE);
-                    ChannelDescription.update(Utility.getClientRole(client));
+                if (TS3Infos.getOnlineClients().containsKey(leaveEvent.getClientId())) {
+                    Client client = TS3Infos.getOnlineClients().get(leaveEvent.getClientId());
+                    String unique_identifier = client.getUniqueIdentifier();
+                    if (Utility.getManagerClients().containsKey(unique_identifier)) {
+                        Utility.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_OFFLINE);
+                        ChannelDescription.update(Utility.getClientRole(client));
 
-                    ActivityDisplayFeature.getLogger().info(client.getNickname() + " left the server.");
+                        ActivityDisplayFeature.getLogger().info(client.getNickname() + " left the server.");
+                    }
                 }
             }
 
