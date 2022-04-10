@@ -8,9 +8,9 @@ import com.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ActivityDisplayFeature {
+public class ActivityDisplay {
 
-    private static final Logger log_ = LoggerFactory.getLogger(ActivityDisplayFeature.class);
+    private static final Logger log_ = LoggerFactory.getLogger(ActivityDisplay.class);
     private static MySQL sql_ = new MySQL(log_, "databaseURL_management", "databaseUsername_management", "databasePassword_management");
 
     public static void start() {

@@ -78,7 +78,7 @@ public class Utility {
                 manager_clients_.put(client.getUniqueIdentifier(), ts3_client);
             }
         }
-        ActivityDisplayFeature.getLogger().info("The manager list has been updated.");
+        ActivityDisplay.getLogger().info("The manager list has been updated.");
     }
 
     public static void loadGroups() {
@@ -89,21 +89,21 @@ public class Utility {
             ResultSet result;
 
             // Manager
-            result = ActivityDisplayFeature.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='manager' ORDER BY sort ASC");
+            result = ActivityDisplay.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='manager' ORDER BY sort ASC");
             while (result.next()) {
                 manager_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
 
             // Supporter
-            result = ActivityDisplayFeature.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='supporter' ORDER BY sort ASC");
+            result = ActivityDisplay.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='supporter' ORDER BY sort ASC");
             while (result.next()) {
                 supporter_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
 
             result.close();
-            ActivityDisplayFeature.getLogger().info("Groups were initialised.");
+            ActivityDisplay.getLogger().info("Groups were initialised.");
         } catch (SQLException e) {
-            ActivityDisplayFeature.getLogger().error("Exception in Constants initialize():", e);
+            ActivityDisplay.getLogger().error("Exception in Constants initialize():", e);
         }
     }
 }

@@ -50,8 +50,8 @@ public class Commands {
                     Utility.updateManagerClients();
                     ChannelDescription.update(Types.IS_MANAGER_AND_SUPPORTER);
                 } else if (parts[1].equalsIgnoreCase("restart")) {
-                    ActivityDisplayFeature.stop();
-                    ActivityDisplayFeature.start();
+                    ActivityDisplay.stop();
+                    ActivityDisplay.start();
                 } else {
                     TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command!");
                 }
