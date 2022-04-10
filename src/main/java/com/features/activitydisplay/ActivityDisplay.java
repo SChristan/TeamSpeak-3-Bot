@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class ActivityDisplay {
 
     private static final Logger log_ = LoggerFactory.getLogger(ActivityDisplay.class);
-    private static MySQL sql_ = new MySQL(log_, "databaseURL_management", "databaseUsername_management", "databasePassword_management");
+    private static MySQL sql_ = new MySQL(log_, "databaseURL_activitydisplay", "databaseUsername_activitydisplay", "databasePassword_activitydisplay");
 
     public static void start() {
         sql_.connect();
