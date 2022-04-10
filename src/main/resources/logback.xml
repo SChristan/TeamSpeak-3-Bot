@@ -45,4 +45,14 @@
         <appender-ref ref="ACTIVITY_DISPLAY_LOGGER"/>
   </logger>
 
+  <!-- MaxServerClients-Feature Logger -->
+  <appender name="MAX_SERVER_CLIENTS_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/maxServerClients_${timestamp_day}.log</file>
+    <append>${append}</append>
+    <encoder><pattern>${encoder_pattern}</pattern></encoder>
+  </appender>
+  <logger name="com.features.maxServerClients.MaxServerClients" level="${level}" additivity="TRUE">
+        <appender-ref ref="MAX_SERVER_CLIENTS_LOGGER"/>
+  </logger>
+
 </configuration>
