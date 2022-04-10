@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.Types;
-import com.TS3.TS3Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
+import com.ts3.TS3Client;
 
 public class Utility {
     

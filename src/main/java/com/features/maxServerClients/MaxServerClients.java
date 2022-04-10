@@ -1,4 +1,4 @@
-package com.features.maxServerClients;
+package com.features.maxserverclients;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

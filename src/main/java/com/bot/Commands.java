@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.TS3.TS3Connection;
-import com.TS3.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
+import com.ts3.TS3Connection;
+import com.ts3.TS3Infos;
 
 public class Commands {
 

@@ -3,8 +3,8 @@ package com.features.activitydisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.TS3.TS3Connection;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
+import com.ts3.TS3Connection;
 
 public class ServergroupInfos {
 

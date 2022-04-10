@@ -1,15 +1,15 @@
 package com.features.activitydisplay;
 
-import com.TS3.TS3IDs;
 import com.Types;
-import com.TS3.TS3Events;
-import com.TS3.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientMovedEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
+import com.ts3.TS3Events;
+import com.ts3.TS3IDs;
+import com.ts3.TS3Infos;
 
 public class Events {
 

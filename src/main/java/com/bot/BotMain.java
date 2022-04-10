@@ -3,11 +3,11 @@ package com.bot;
 import java.sql.Statement;
 
 import com.MySQL;
-import com.TS3.TS3Connection;
-import com.TS3.TS3IDs;
 import com.features.activitydisplay.ActivityDisplay;
-import com.features.maxServerClients.MaxServerClients;
-import com.TS3.TS3Events;
+import com.features.maxserverclients.MaxServerClients;
+import com.ts3.TS3Connection;
+import com.ts3.TS3Events;
+import com.ts3.TS3IDs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

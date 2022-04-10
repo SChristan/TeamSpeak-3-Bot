@@ -3,11 +3,11 @@ package com.features.activitydisplay;
 import java.util.List;
 
 import com.Types;
-import com.TS3.TS3Client;
-import com.TS3.TS3Connection;
-import com.TS3.TS3IDs;
 import com.github.theholywaffle.teamspeak3.api.ChannelProperty;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
+import com.ts3.TS3Client;
+import com.ts3.TS3Connection;
+import com.ts3.TS3IDs;
 
 public class ChannelDescription {
 

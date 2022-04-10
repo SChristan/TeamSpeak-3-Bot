@@ -1,16 +1,16 @@
-package com.features.maxServerClients;
+package com.features.maxserverclients;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.TS3.TS3Connection;
-import com.TS3.TS3Events;
-import com.TS3.TS3Infos;
 import com.github.theholywaffle.teamspeak3.api.VirtualServerProperty;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.wrapper.VirtualServerInfo;
+import com.ts3.TS3Connection;
+import com.ts3.TS3Events;
+import com.ts3.TS3Infos;
 
 public class Events {
 

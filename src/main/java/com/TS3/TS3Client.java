@@ -1,4 +1,4 @@
-package com.TS3;
+package com.ts3;
 
 import com.Types;
 
