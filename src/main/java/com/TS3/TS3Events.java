@@ -45,10 +45,10 @@ public class TS3Events {
 
             @Override
             public void onClientJoin(ClientJoinEvent joinEvent) {
+                BotMain.getLogger().debug("Client went online: " + joinEvent.getClientId() + "  " + joinEvent.getClientNickname());
                 if (joinEvent.getClientType() == 0) {
                     Client client = api_.getClientInfo(joinEvent.getClientId());
                     TS3Infos.addOnlineClient(client);
-                    BotMain.getLogger().debug("Client went online: " + joinEvent.getClientId() + "  " + joinEvent.getClientNickname());
                 }
                 for (TS3EventAdapter listener : event_listeners_) {
                     listener.onClientJoin(joinEvent);
@@ -57,13 +57,11 @@ public class TS3Events {
 
             @Override
             public void onClientLeave(ClientLeaveEvent leaveEvent) {
-                if (TS3Infos.getOnlineClients().containsKey(leaveEvent.getClientId())) {
-                    for (TS3EventAdapter listener : event_listeners_) {
-                        listener.onClientLeave(leaveEvent);
-                    }
-                    TS3Infos.removeOnlineClient(leaveEvent.getClientId());
-                    BotMain.getLogger().debug("Client went offline: " + leaveEvent.getClientId());
+                BotMain.getLogger().debug("Client went offline: " + leaveEvent.getClientId());
+                for (TS3EventAdapter listener : event_listeners_) {
+                    listener.onClientLeave(leaveEvent);
                 }
+                TS3Infos.removeOnlineClient(leaveEvent.getClientId());
             }
 
             @Override
