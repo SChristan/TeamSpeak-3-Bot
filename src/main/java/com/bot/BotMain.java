@@ -6,6 +6,7 @@ import com.MySQL;
 import com.TS3.TS3Connection;
 import com.TS3.TS3IDs;
 import com.features.activitydisplay.ActivityDisplayFeature;
+import com.features.maxServerClients.MaxServerClients;
 import com.TS3.TS3Events;
 
 import org.slf4j.Logger;
@@ -27,11 +28,13 @@ public class BotMain {
         TS3Connection.connect();
         TS3Events.startListen();
         ActivityDisplayFeature.start();
+        MaxServerClients.start();
         log_.info("The bot was started.");
     }
 
     public static void stop() {
         ActivityDisplayFeature.stop();
+        MaxServerClients.stop();
         TS3Events.stopListen();
         TS3Connection.disconnect();
         sql_.disconnect();
