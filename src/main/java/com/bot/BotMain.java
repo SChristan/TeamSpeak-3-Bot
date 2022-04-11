@@ -5,6 +5,7 @@ import java.sql.Statement;
 import com.MySQL;
 import com.features.activitydisplay.ActivityDisplay;
 import com.features.maxserverclients.MaxServerClients;
+import com.features.welcomemessage.WelcomeMessage;
 import com.ts3.TS3Connection;
 import com.ts3.TS3Events;
 import com.ts3.TS3IDs;
@@ -29,12 +30,14 @@ public class BotMain {
         TS3Events.startListen();
         ActivityDisplay.start();
         MaxServerClients.start();
+        WelcomeMessage.start();
         log_.info("The bot was started.");
     }
 
     public static void stop() {
         ActivityDisplay.stop();
         MaxServerClients.stop();
+        WelcomeMessage.stop();
         TS3Events.stopListen();
         TS3Connection.disconnect();
         sql_.disconnect();
