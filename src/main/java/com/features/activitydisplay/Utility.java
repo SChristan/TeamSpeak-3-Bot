@@ -103,7 +103,7 @@ public class Utility {
             result.close();
             ActivityDisplay.getLogger().info("Groups were initialised.");
         } catch (SQLException e) {
-            ActivityDisplay.getLogger().error("Exception in Constants initialize():", e);
+            ActivityDisplay.getLogger().error("Database query failed.", e);
         }
     }
 }

@@ -61,7 +61,7 @@ public class TS3IDs {
             result.close();
             BotMain.getLogger().info("TS3Constants were initialised.");
         } catch (NumberFormatException | SQLException e) {
-            BotMain.getLogger().error("Exception in TS3Constants initialize():", e);
+            BotMain.getLogger().error("Database query or integer parsing failed.", e);
         }
     }
 }

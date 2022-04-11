@@ -24,7 +24,7 @@ public class Commands {
             }
             result.close();
         } catch (SQLException e) {
-            BotMain.getLogger().error("Exception in Commands loadAuthorizedGroups():", e);
+            BotMain.getLogger().error("Database query failed.", e);
         }
     }
 

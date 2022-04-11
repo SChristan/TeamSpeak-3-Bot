@@ -39,8 +39,8 @@ public class MySQL {
             connection_ = DriverManager.getConnection(db_url_, db_username_, db_password_);
             statement_ = connection_.createStatement();
             log_.info("Database connection was established.");
-        } catch (IOException | SQLException e) {
-            log_.error("Exception in MySQL connect():", e);
+        } catch (SQLException e) {
+            log_.error("Database access error occured.", e);
         }
     }
 
@@ -50,7 +50,7 @@ public class MySQL {
             connection_.close();
             log_.info("Database connection was closed.");
         } catch (SQLException e) {
-            log_.error("Exception in MySQL disconnect():", e);
+            log_.error("Database disconnection error occured.", e);
         }
     }
 
@@ -58,29 +58,33 @@ public class MySQL {
         return statement_;
     }
 
-    private void loadDBParameter() throws IOException {
-        String line;
-        File file = new File("BotConfig.txt");
-        FileReader filereader = new FileReader(file);
-        BufferedReader reader = new BufferedReader(filereader);
+    private void loadDBParameter() {
+        try {
+            String line;
+            File file = new File("BotConfig.txt");
+            FileReader filereader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(filereader);
 
-        while ((line = reader.readLine()) != null) {
-            if (line.indexOf('=') == -1)
-                continue;
+            while ((line = reader.readLine()) != null) {
+                if (line.indexOf('=') == -1)
+                    continue;
 
-            int index = line.indexOf('=');
-            String parameter = line.substring(0, index);
-            String value = line.substring(index + 1);
+                int index = line.indexOf('=');
+                String parameter = line.substring(0, index);
+                String value = line.substring(index + 1);
 
-            if (parameter.equalsIgnoreCase(db_url_config_name_))
-                db_url_ = value;
-            else if (parameter.equalsIgnoreCase(db_username_config_name_))
-                db_username_ = value;
-            else if (parameter.equalsIgnoreCase(db_password_config_name_))
-                db_password_ = value;
+                if (parameter.equalsIgnoreCase(db_url_config_name_))
+                    db_url_ = value;
+                else if (parameter.equalsIgnoreCase(db_username_config_name_))
+                    db_username_ = value;
+                else if (parameter.equalsIgnoreCase(db_password_config_name_))
+                    db_password_ = value;
+            }
+            reader.close();
+            filereader.close();
+            log_.info("Database parameter were loaded from config file.");
+        } catch (IOException e) {
+            log_.error("File read failed.", e);
         }
-        reader.close();
-        filereader.close();
-        log_.info("Database parameter were loaded from config file.");
     }
 }

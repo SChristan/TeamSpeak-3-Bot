@@ -26,7 +26,7 @@ public class Utility {
             
             WelcomeMessage.getLogger().info("Welcome message loaded.");
         } catch (SQLException e) {
-            WelcomeMessage.getLogger().error("Exception in Utility loadMessage():", e);
+            WelcomeMessage.getLogger().error("Database query failed.", e);
         }
     }
 }
