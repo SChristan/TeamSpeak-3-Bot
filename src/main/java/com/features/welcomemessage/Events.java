@@ -24,6 +24,7 @@ public class Events {
 
             @Override
             public void onTextMessage(TextMessageEvent textEvent) {
+                Commands.execute(textEvent);
             }
 
             @Override

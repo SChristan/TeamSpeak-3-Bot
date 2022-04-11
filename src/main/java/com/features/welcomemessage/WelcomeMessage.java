@@ -14,6 +14,7 @@ public class WelcomeMessage {
 
     public static void start() {
         sql_.connect();
+        Commands.loadAuthorizedGroups();
         Utility.loadMessage();
         Events.startListen();
     }
