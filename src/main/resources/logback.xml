@@ -37,11 +37,11 @@
 
   <!-- ActivityDisplay-Feature Logger -->
   <appender name="ACTIVITY_DISPLAY_LOGGER" class="ch.qos.logback.core.FileAppender">
-    <file>log/activity_${timestamp_day}.log</file>
+    <file>log/activityDisplay_${timestamp_day}.log</file>
     <append>${append}</append>
     <encoder><pattern>${encoder_pattern}</pattern></encoder>
   </appender>
-  <logger name="com.features.activitydisplay.ActivityDisplayFeature" level="${level}" additivity="TRUE">
+  <logger name="com.features.activitydisplay.ActivityDisplay" level="${level}" additivity="TRUE">
         <appender-ref ref="ACTIVITY_DISPLAY_LOGGER"/>
   </logger>
 
@@ -51,8 +51,18 @@
     <append>${append}</append>
     <encoder><pattern>${encoder_pattern}</pattern></encoder>
   </appender>
-  <logger name="com.features.maxServerClients.MaxServerClients" level="${level}" additivity="TRUE">
+  <logger name="com.features.maxserverclients.MaxServerClients" level="${level}" additivity="TRUE">
         <appender-ref ref="MAX_SERVER_CLIENTS_LOGGER"/>
+  </logger>
+
+  <!-- WelcomeMessage-Feature Logger -->
+  <appender name="WELCOME_MESSAGE_LOGGER" class="ch.qos.logback.core.FileAppender">
+    <file>log/welcomeMessage_${timestamp_day}.log</file>
+    <append>${append}</append>
+    <encoder><pattern>${encoder_pattern}</pattern></encoder>
+  </appender>
+  <logger name="com.features.welcomemessage.WelcomeMessage" level="${level}" additivity="TRUE">
+        <appender-ref ref="WELCOME_MESSAGE_LOGGER"/>
   </logger>
 
 </configuration>
