@@ -3,6 +3,7 @@ package com.features.welcomemessage;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
+import com.ts3.TS3Connection;
 import com.ts3.TS3Events;
 
 public class Events {
@@ -28,6 +29,7 @@ public class Events {
             @Override
             public void onClientJoin(ClientJoinEvent joinEvent) {
                 if (joinEvent.getClientType() == 0) {
+                    TS3Connection.getApi().sendPrivateMessage(joinEvent.getClientId(), Utility.getWelcomeMessage(joinEvent));
                 }
             }
         };
