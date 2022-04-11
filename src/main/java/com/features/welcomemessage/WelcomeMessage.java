@@ -14,9 +14,11 @@ public class WelcomeMessage {
 
     public static void start() {
         sql_.connect();
+        Events.startListen();
     }
 
     public static void stop() {
+        Events.stopListen();
         sql_.disconnect();
     }
 
