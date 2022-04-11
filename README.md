@@ -55,7 +55,7 @@ The Channel-IDs are loaded as an **Integer** from the database table `channel_id
 The bot provides various information about the Teamspeak server, such as online clients and IDs. All features can use these information, but should not modify them.
 
 ### Events
-The bot is connected to the Teamspeak server and receives events from the Teamspeak API, which can be subscribed by the features. The bot does not subscribe to all events of the API, but only those that are needed at the moment.
+The bot is connected to the Teamspeak server and receives events from the Teamspeak API, which can be subscribed by the features. The bot may not subscribe to all events of the API, but only those that are needed at the moment.
 
 ## Features
 You can add any features to this bot, which should implement a static `start()` and `stop()` method.
