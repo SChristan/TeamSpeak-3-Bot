@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bot.BotMain;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.ts3.TS3Connection;
@@ -18,13 +17,13 @@ public class Commands {
     public static void loadAuthorizedGroups() {
         try {
             authorized_groups_.clear();
-            ResultSet result = BotMain.getSQLStatement().executeQuery("SELECT * FROM verified_servergroups");
+            ResultSet result = WelcomeMessage.getSQLStatement().executeQuery("SELECT * FROM verified_servergroups");
             while (result.next()) {
                 authorized_groups_.add(result.getInt("group_id"));
             }
             result.close();
         } catch (SQLException e) {
-            BotMain.getLogger().error("Database query failed.", e);
+            WelcomeMessage.getLogger().error("Database query failed.", e);
         }
     }
 
