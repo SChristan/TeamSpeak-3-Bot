@@ -1,5 +1,6 @@
 package com.features.welcomemessage;
 
+import com.Types;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
@@ -12,7 +13,7 @@ public class Events {
 
     public static void startListen() {
         createEventAdapter();
-        TS3Events.addListener(event_adapter_);
+        TS3Events.addListener(event_adapter_, Types.EVENT_TEXT, Types.EVENT_CL_JOIN);
     }
 
     public static void stopListen() {

@@ -3,6 +3,7 @@ package com.features.maxserverclients;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.Types;
 import com.github.theholywaffle.teamspeak3.api.VirtualServerProperty;
 import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
@@ -19,7 +20,7 @@ public class Events {
 
     public static void startListen() {
         createEventAdapter();
-        TS3Events.addListener(event_adapter_);
+        TS3Events.addListener(event_adapter_, Types.EVENT_CL_JOIN, Types.EVENT_CL_LEAVE);
     }
 
     public static void stopListen() {

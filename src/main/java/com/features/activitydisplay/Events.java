@@ -17,7 +17,7 @@ public class Events {
 
     public static void startListen() {
         createEventAdapter();
-        TS3Events.addListener(event_adapter_);
+        TS3Events.addListener(event_adapter_, Types.EVENT_TEXT, Types.EVENT_CL_JOIN, Types.EVENT_CL_LEAVE, Types.EVENT_CL_MOVED);
     }
 
     public static void stopListen() {
