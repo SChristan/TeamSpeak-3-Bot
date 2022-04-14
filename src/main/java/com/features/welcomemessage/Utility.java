@@ -17,7 +17,7 @@ public class Utility {
     public static void loadMessage() {
         try {
             ResultSet result;
-            result = WelcomeMessage.getSQLStatement().executeQuery("SELECT * FROM welcome_message WHERE id=1");
+            result = WelcomeMessage.getSQLStatement().executeQuery("SELECT * FROM welcome_message WHERE id='NEWS'");
             
             while (result.next()) {
                 welcome_message_ = result.getString("message");

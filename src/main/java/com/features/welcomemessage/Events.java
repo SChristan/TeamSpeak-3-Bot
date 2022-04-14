@@ -32,6 +32,7 @@ public class Events {
             public void onClientJoin(ClientJoinEvent joinEvent) {
                 if (joinEvent.getClientType() == 0) {
                     TS3Connection.getApi().sendPrivateMessage(joinEvent.getClientId(), Utility.getWelcomeMessage(joinEvent));
+                    WelcomeMessage.getLogger().info("Welcome message sent to " + joinEvent.getClientNickname() + " (UUID: " + joinEvent.getUniqueClientIdentifier() + ")");
                 }
             }
         };
