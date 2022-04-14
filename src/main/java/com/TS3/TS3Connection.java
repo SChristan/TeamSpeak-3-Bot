@@ -11,12 +11,14 @@ import com.github.theholywaffle.teamspeak3.api.ClientProperty;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventType;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ConnectionHandler;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
+import com.github.theholywaffle.teamspeak3.api.wrapper.ServerQueryInfo;
 
 public class TS3Connection {
 
 	private static TS3Api api_;
 	private static TS3Query query_;
 	private static TS3Config config_;
+	private static ServerQueryInfo who_am_i_;
 
 	public static TS3Api getApi() {
 		return api_;
@@ -24,6 +26,10 @@ public class TS3Connection {
 
 	public static TS3Query getQuery() {
 		return query_;
+	}
+
+	public static ServerQueryInfo whoAmI() {
+		return who_am_i_;
 	}
 
 	public static void disconnect() {
@@ -44,6 +50,7 @@ public class TS3Connection {
 				api.selectVirtualServerByPort(TS3IDs.PORT, TS3IDs.BOT_NICKNAME);
 				api.registerEvents(TS3EventType.TEXT_PRIVATE, TS3EventType.SERVER, TS3EventType.CHANNEL);
 				TS3Infos.loadOnlineClients(api);
+				who_am_i_ = api.whoAmI();
 			}
 
 			@Override
@@ -57,6 +64,6 @@ public class TS3Connection {
 
 		BotMain.getLogger().info("TS3Query has connected to the Teamspeak server.");
 
-        api_.editClient(api_.whoAmI().getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, TS3IDs.VERSION));
+        api_.editClient(who_am_i_.getId(), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, TS3IDs.VERSION));
 	}
 }
