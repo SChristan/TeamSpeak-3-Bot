@@ -53,10 +53,12 @@ public class TS3Events {
 
             @Override
             public void onTextMessage(TextMessageEvent textEvent) {
-                BotMain.getLogger().info(textEvent.getTargetMode() + " message from " + textEvent.getInvokerName() + " (UUID: " + textEvent.getInvokerUniqueId() + "): " + textEvent.getMessage());
-                Commands.execute(textEvent);
-                for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_TEXT)) {
-                    listener.onTextMessage(textEvent);
+                if (textEvent.getInvokerId() != TS3Connection.whoAmI().getId()) {
+                    BotMain.getLogger().info(textEvent.getTargetMode() + " message from " + textEvent.getInvokerName() + " (UUID: " + textEvent.getInvokerUniqueId() + "): " + textEvent.getMessage());
+                    Commands.execute(textEvent);
+                    for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_TEXT)) {
+                        listener.onTextMessage(textEvent);
+                    }
                 }
             }
 
