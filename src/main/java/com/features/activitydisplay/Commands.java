@@ -51,10 +51,7 @@ public class Commands {
                     Utility.loadGroups();
                     Utility.updateManagerClients();
                     ChannelDescription.update(Types.IS_MANAGER_AND_SUPPORTER);
-                } else if (parts[1].equalsIgnoreCase("restart")) {
-                    ActivityDisplay.stop();
-                    ActivityDisplay.start();
-                    ActivityDisplay.getLogger().info("ActivityDisplay was restarted by the restart command.");
+                    ActivityDisplay.getLogger().info("ActivityDisplay was reloaded by the reload command.");
                 } else {
                     TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command.");
                 }
