@@ -1,9 +1,13 @@
 # Feature: ActivityDisplay
 ## Table of Contents
+1. [Functionality](#functionality)
 1. [Database Structure](#database-structure)
    1. [Authorized Servergroups](#authorized-servergroups)
    1. [ON/OFF Channel Description](#onoff-channel-description)
 1. [Logging](#logging)
+
+## Functionality
+This feature displays the activity status of the management members in two different channel descriptions. It supports three different status: **ON**, **OFF**, **AFK**
 
 ## Database Structure
 ### Authorized Servergroups
