@@ -1,31 +1,20 @@
 # Feature: WelcomeMessage
 ## Table of Contents
 1. [Functionality](#functionality)
-1. [Database Information](#database-information)
-   1. [Database Connection](#database-connection)
-   1. [Database Structure](#database-structure)
-      1. [Authorized Servergroups](#authorized-servergroups)
-      1. [Welcome Message](#welcome-message)
+1. [Database Structure](#database-structure)
+   1. [Authorized Servergroups](#authorized-servergroups)
+   1. [Welcome Message](#welcome-message)
 1. [Logging](#logging)
 
 ## Functionality
 This feature sends a private text message to all clients that connect to the Teamspeak server.
 
-## Database Information
-### Database Connection
-The application expects a `BotConfig.txt` in the same directory, with the following database information.
-```
-databaseURL_welcomemessage=jdbc:mysql://<ip-address>:<port>/<databasename>
-databaseUsername_welcomemessage=<username>
-databasePassword_welcomemessage=<password>
-```
+## Database Structure
+### Authorized Servergroups
+The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `wm__verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
 
-### Database Structure
-#### Authorized Servergroups
-The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
-
-#### Welcome Message
-The welcome message is loaded from the database table `welcome_message`. It needs two columns as shown below.
+### Welcome Message
+The welcome message is loaded from the database table `wm__welcome_message`. It needs two columns as shown below.
 
 Column | Type | Description
 --- | --- | ---

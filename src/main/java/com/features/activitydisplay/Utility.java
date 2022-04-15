@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.MySQL;
 import com.Types;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroupClient;
@@ -89,13 +90,13 @@ public class Utility {
             ResultSet result;
 
             // Manager
-            result = ActivityDisplay.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='manager' ORDER BY sort ASC");
+            result = MySQL.getStatement().executeQuery("SELECT * FROM ad__channeldescription WHERE servergroup_designation='manager' ORDER BY sort ASC");
             while (result.next()) {
                 manager_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
 
             // Supporter
-            result = ActivityDisplay.getSQLStatement().executeQuery("SELECT * FROM channeldescription_content WHERE servergroup_designation='supporter' ORDER BY sort ASC");
+            result = MySQL.getStatement().executeQuery("SELECT * FROM ad__channeldescription WHERE servergroup_designation='supporter' ORDER BY sort ASC");
             while (result.next()) {
                 supporter_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }

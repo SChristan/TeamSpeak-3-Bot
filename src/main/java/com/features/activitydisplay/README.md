@@ -1,27 +1,16 @@
 # Feature: ActivityDisplay
 ## Table of Contents
-1. [Database Information](#database-information)
-   1. [Database Connection](#database-connection)
-   1. [Database Structure](#database-structure)
-      1. [Authorized Servergroups](#authorized-servergroups)
-      1. [ON/OFF Channel Description](#onoff-channel-description)
+1. [Database Structure](#database-structure)
+   1. [Authorized Servergroups](#authorized-servergroups)
+   1. [ON/OFF Channel Description](#onoff-channel-description)
 1. [Logging](#logging)
 
-## Database Information
-### Database Connection
-The application expects a `BotConfig.txt` in the same directory, with the following database information.
-```
-databaseURL_management=jdbc:mysql://<ip-address>:<port>/<databasename>
-databaseUsername_management=<username>
-databasePassword_management=<password>
-```
+## Database Structure
+### Authorized Servergroups
+The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `ad__verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
 
-### Database Structure
-#### Authorized Servergroups
-The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
-
-#### ON/OFF Channel Description
-The shape of the channel descriptions are loaded from the database table `channeldescription_content`. It needs four columns as shown below.
+### ON/OFF Channel Description
+The shape of the channel descriptions are loaded from the database table `ad__channeldescription`. It needs four columns as shown below.
 
 Column | Type | Description
 --- | --- | ---

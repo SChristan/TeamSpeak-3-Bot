@@ -9,56 +9,43 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.slf4j.Logger;
+import com.bot.BotMain;
 
 public class MySQL {
 
-    private String db_url_;
-    private String db_username_;
-    private String db_password_;
+    private static String db_url_;
+    private static String db_username_;
+    private static String db_password_;
 
-    private String db_url_config_name_;
-    private String db_username_config_name_;
-    private String db_password_config_name_;
-
-    private Connection connection_;
-    private Statement statement_;
-
-    private Logger log_;
-
-    public MySQL(Logger log, String db_url_config_name, String db_username_config_name, String db_password_config_name) {
-        log_ = log;
-        db_url_config_name_ = db_url_config_name;
-        db_username_config_name_ = db_username_config_name;
-        db_password_config_name_ = db_password_config_name;
-    }
+    private static Connection connection_;
+    private static Statement statement_;
     
-    public void connect() {
+    public static void connect() {
         try {
             loadDBParameter();
             connection_ = DriverManager.getConnection(db_url_, db_username_, db_password_);
             statement_ = connection_.createStatement();
-            log_.info("Database connection was established.");
+            BotMain.getLogger().info("Database connection was established.");
         } catch (SQLException e) {
-            log_.error("Database access error occured.", e);
+            BotMain.getLogger().error("Database access error occured.", e);
         }
     }
 
-    public void disconnect() {
+    public static void disconnect() {
         try {
             statement_.close();
             connection_.close();
-            log_.info("Database connection was closed.");
+            BotMain.getLogger().info("Database connection was closed.");
         } catch (SQLException e) {
-            log_.error("Database disconnection error occured.", e);
+            BotMain.getLogger().error("Database disconnection error occured.", e);
         }
     }
 
-    public Statement getStatement() {
+    public static Statement getStatement() {
         return statement_;
     }
 
-    private void loadDBParameter() {
+    private static void loadDBParameter() {
         try {
             String line;
             File file = new File("BotConfig.txt");
@@ -73,18 +60,18 @@ public class MySQL {
                 String parameter = line.substring(0, index);
                 String value = line.substring(index + 1);
 
-                if (parameter.equalsIgnoreCase(db_url_config_name_))
+                if (parameter.equalsIgnoreCase("databaseURL"))
                     db_url_ = value;
-                else if (parameter.equalsIgnoreCase(db_username_config_name_))
+                else if (parameter.equalsIgnoreCase("databaseUsername"))
                     db_username_ = value;
-                else if (parameter.equalsIgnoreCase(db_password_config_name_))
+                else if (parameter.equalsIgnoreCase("databasePassword"))
                     db_password_ = value;
             }
             reader.close();
             filereader.close();
-            log_.info("Database parameter were loaded from config file.");
+            BotMain.getLogger().info("Database parameter were loaded from config file.");
         } catch (IOException e) {
-            log_.error("File read failed.", e);
+            BotMain.getLogger().error("File read failed.", e);
         }
     }
 }

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import com.MySQL;
 import com.bot.BotMain;
 
 public class TS3IDs {
@@ -32,7 +33,7 @@ public class TS3IDs {
 
             // Bot config
             HashMap<String, String> config_map_ = new HashMap<String, String>();
-            result = BotMain.getSQLStatement().executeQuery("SELECT * FROM bot_config");
+            result = MySQL.getStatement().executeQuery("SELECT * FROM bot__config");
             while (result.next()) {
                 config_map_.put(result.getString("config_designation"), result.getString("value"));
             }
@@ -46,7 +47,7 @@ public class TS3IDs {
 
             // Channel IDs
             HashMap<String, Integer> channelID_map = new HashMap<String, Integer>();
-            result = BotMain.getSQLStatement().executeQuery("SELECT * FROM channel_ids");
+            result = MySQL.getStatement().executeQuery("SELECT * FROM bot__channel_ids");
             while (result.next()) {
                 channelID_map.put(result.getString("channel_designation"), result.getInt("channel_id"));
             }

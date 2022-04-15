@@ -23,7 +23,7 @@ databasePassword=<password>
 
 ### Database Structure
 #### Teamspeakserver Information
-The server connection information are loaded as a **String** from the database table `bot_config`, which contains the following information.
+The server connection information are loaded as a **String** from the database table `bot__config`, which contains the following information.
 
 `config_designation` | `value` | Description
 --- | --- | ---
@@ -35,10 +35,10 @@ The server connection information are loaded as a **String** from the database t
 `enable_communications_logging` | `<statement>` | `TRUE` or `FALSE`! `TRUE` enables extended logging of the communication between the application and the Teamspeak server.
 
 #### Authorized Servergroups
-The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
+The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `bot__verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
 
 #### Channel-IDs
-The Channel-IDs are loaded as an **Integer** from the database table `channel_ids`, it supports the following channels.
+The Channel-IDs are loaded as an **Integer** from the database table `bot__channel_ids`, it supports the following channels.
 
 `channel_designation` | `channel_id` | Description
 --- | --- | ---

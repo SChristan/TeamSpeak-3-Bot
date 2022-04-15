@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.MySQL;
 import com.Types;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
@@ -18,7 +19,7 @@ public class Commands {
     public static void loadAuthorizedGroups() {
         try {
             authorized_groups_.clear();
-            ResultSet result = ActivityDisplay.getSQLStatement().executeQuery("SELECT * FROM verified_servergroups");
+            ResultSet result = MySQL.getStatement().executeQuery("SELECT * FROM ad__verified_servergroups");
             while (result.next()) {
                 authorized_groups_.add(result.getInt("group_id"));
             }
