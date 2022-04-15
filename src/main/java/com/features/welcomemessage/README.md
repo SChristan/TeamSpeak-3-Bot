@@ -14,7 +14,7 @@ This feature sends a private text message to all clients that connect to the Tea
 The Teamspeak Servergroups, which are allowed to controll the bot via direct messages, are loaded from the database table `wm__verified_servergroups`. The application expects the ServerGroup-ID as an **Integer** in the column `group_id`.
 
 ### Welcome Message
-The welcome message is loaded from the database table `wm__welcome_message`. It needs two columns as shown below.
+The welcome message is loaded from the database table `wm__messages`. It needs two columns as shown below.
 
 Column | Type | Description
 --- | --- | ---

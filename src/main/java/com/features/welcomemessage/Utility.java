@@ -18,7 +18,7 @@ public class Utility {
     public static void loadMessage() {
         try {
             ResultSet result;
-            result = MySQL.getStatement().executeQuery("SELECT * FROM wm__welcome_message WHERE id='NEWS'");
+            result = MySQL.getStatement().executeQuery("SELECT * FROM wm__messages WHERE id='NEWS'");
             
             while (result.next()) {
                 welcome_message_ = result.getString("message");
