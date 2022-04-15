@@ -1,6 +1,7 @@
 # Feature: WelcomeMessage
 ## Table of Contents
 1. [Functionality](#functionality)
+1. [Commands](#commands)
 1. [Database Structure](#database-structure)
    1. [Authorized Servergroups](#authorized-servergroups)
    1. [Welcome Message](#welcome-message)
@@ -8,6 +9,16 @@
 
 ## Functionality
 This feature sends a private text message to all clients that connect to the Teamspeak server.
+
+## Commands
+The commands for this feature start with "!wm" followed by a colon and the actual command.  
+Example: `!wm:exit`
+
+The following commands are available:
+command | Description
+--- | ---
+exit | Stops any activity of this feature.
+reload | Reloads all information from the database.
 
 ## Database Structure
 ### Authorized Servergroups

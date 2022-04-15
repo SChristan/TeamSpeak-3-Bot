@@ -1,5 +1,6 @@
 # GermanMonkeys Bot
 ## Table of Contents
+1. [Commands](#commands)
 1. [Database Information](#database-information)
    1. [Database Connection](#database-connection)
    1. [Database Structure](#database-structure)
@@ -11,6 +12,17 @@
    1. [Events](#events)
 1. [Features](#features)
 1. [Logging](#logging)
+
+## Commands
+The commands for the bot start with "!bot" followed by a colon and the actual command.  
+Example: `!bot:exit`
+
+The following commands are available:
+command | Description
+--- | ---
+exit | Stops any activity of the bot and terminates the application.
+restart | Restarts all functionalities of the bot, like at startup.
+nickname:\<name> | Sets the Teamspeak nickname of the bot to the specified name.
 
 ## Database Information
 ### Database Connection

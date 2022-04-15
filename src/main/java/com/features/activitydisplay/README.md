@@ -1,6 +1,7 @@
 # Feature: ActivityDisplay
 ## Table of Contents
 1. [Functionality](#functionality)
+1. [Commands](#commands)
 1. [Database Structure](#database-structure)
    1. [Authorized Servergroups](#authorized-servergroups)
    1. [ON/OFF Channel Description](#onoff-channel-description)
@@ -8,6 +9,16 @@
 
 ## Functionality
 This feature displays the activity status of the management members in two different channel descriptions. It supports three different status: **ON**, **OFF**, **AFK**
+
+## Commands
+The commands for this feature start with "!ad" followed by a colon and the actual command.  
+Example: `!ad:exit`
+
+The following commands are available:
+command | Description
+--- | ---
+exit | Stops any activity of this feature.
+reload | Reloads all information from the database.
 
 ## Database Structure
 ### Authorized Servergroups
