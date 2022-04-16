@@ -28,7 +28,7 @@ public class BotMain {
         ActivityDisplay.start();
         MaxServerClients.start();
         WelcomeMessage.start();
-        log_.info("The bot was started.");
+        log_.info("The bot was started. " + TS3IDs.VERSION);
     }
 
     public static void stop() {
