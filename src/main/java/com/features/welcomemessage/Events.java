@@ -24,15 +24,15 @@ public class Events {
         event_adapter_ = new TS3EventAdapter() {
 
             @Override
-            public void onTextMessage(TextMessageEvent textEvent) {
-                Commands.execute(textEvent);
+            public void onTextMessage(TextMessageEvent text_event) {
+                Commands.execute(text_event);
             }
 
             @Override
-            public void onClientJoin(ClientJoinEvent joinEvent) {
-                if (joinEvent.getClientType() == 0) {
-                    TS3Connection.getApi().sendPrivateMessage(joinEvent.getClientId(), Utility.getWelcomeMessage(joinEvent));
-                    WelcomeMessage.getLogger().info("Welcome message sent to " + joinEvent.getClientNickname() + " (UUID: " + joinEvent.getUniqueClientIdentifier() + ")");
+            public void onClientJoin(ClientJoinEvent join_event) {
+                if (join_event.getClientType() == 0) {
+                    TS3Connection.getApi().sendPrivateMessage(join_event.getClientId(), Utility.getWelcomeMessage(join_event));
+                    WelcomeMessage.getLogger().info("Welcome message sent to " + join_event.getClientNickname() + " (UUID: " + join_event.getUniqueClientIdentifier() + ")");
                 }
             }
         };

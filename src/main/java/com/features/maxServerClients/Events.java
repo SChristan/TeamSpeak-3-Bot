@@ -31,7 +31,7 @@ public class Events {
         event_adapter_ = new TS3EventAdapter() {
             
             @Override
-            public void onClientJoin(ClientJoinEvent joinEvent) {
+            public void onClientJoin(ClientJoinEvent join_event) {
                 if (TS3Infos.getOnlineClients().size() > 180) {
                     VirtualServerInfo server_info = TS3Connection.getApi().getServerInfo();
                     int clients_online = server_info.getClientsOnline();
@@ -54,7 +54,7 @@ public class Events {
             }
 
             @Override
-            public void onClientLeave(ClientLeaveEvent e) {
+            public void onClientLeave(ClientLeaveEvent leave_event) {
                 if (max_clients_ > 200 && TS3Infos.getOnlineClients().size() < 180) {
                     max_clients_ = 200;
                     Map<VirtualServerProperty, String> properties = new HashMap<>();

@@ -28,19 +28,19 @@ public class Events {
         event_adapter_ = new TS3EventAdapter() {
 
             @Override
-            public void onTextMessage(TextMessageEvent textEvent) {
-                Commands.execute(textEvent);
+            public void onTextMessage(TextMessageEvent text_event) {
+                Commands.execute(text_event);
             }
 
             @Override
-            public void onClientJoin(ClientJoinEvent joinEvent) {
-                if (Utility.getManagerClients().containsKey(joinEvent.getUniqueClientIdentifier())) {
-                    Client client = TS3Infos.getOnlineClients().get(joinEvent.getClientId());
+            public void onClientJoin(ClientJoinEvent join_event) {
+                if (Utility.getManagerClients().containsKey(join_event.getUniqueClientIdentifier())) {
+                    Client client = TS3Infos.getOnlineClients().get(join_event.getClientId());
                     Types activity_status = Types.IS_ONLINE;
                     if (client.getChannelId() == TS3IDs.CHANNEL_ID_AFK_SHORT || client.getChannelId() == TS3IDs.CHANNEL_ID_AFK_LONG) {
                         activity_status = Types.IS_AFK;
                     }
-                    Utility.getManagerClients().get(joinEvent.getUniqueClientIdentifier()).setActivityStatus(activity_status);
+                    Utility.getManagerClients().get(join_event.getUniqueClientIdentifier()).setActivityStatus(activity_status);
                     ChannelDescription.update(Utility.getClientRole(client));
 
                     ActivityDisplay.getLogger().info(client.getNickname() + " joined the server.");
@@ -48,9 +48,9 @@ public class Events {
             }
 
             @Override
-            public void onClientLeave(ClientLeaveEvent leaveEvent) {
-                if (TS3Infos.getOnlineClients().containsKey(leaveEvent.getClientId())) {
-                    Client client = TS3Infos.getOnlineClients().get(leaveEvent.getClientId());
+            public void onClientLeave(ClientLeaveEvent leave_event) {
+                if (TS3Infos.getOnlineClients().containsKey(leave_event.getClientId())) {
+                    Client client = TS3Infos.getOnlineClients().get(leave_event.getClientId());
                     String unique_identifier = client.getUniqueIdentifier();
                     if (Utility.getManagerClients().containsKey(unique_identifier)) {
                         Utility.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_OFFLINE);
@@ -62,10 +62,10 @@ public class Events {
             }
 
             @Override
-            public void onClientMoved(ClientMovedEvent movedEvent) {
-                Client client = TS3Infos.getOnlineClients().get(movedEvent.getClientId());
+            public void onClientMoved(ClientMovedEvent moved_event) {
+                Client client = TS3Infos.getOnlineClients().get(moved_event.getClientId());
                 String unique_identifier = client.getUniqueIdentifier();
-                int channel_target_id = movedEvent.getTargetChannelId();
+                int channel_target_id = moved_event.getTargetChannelId();
                 if (Utility.getManagerClients().containsKey(unique_identifier) && (channel_target_id == TS3IDs.CHANNEL_ID_AFK_SHORT || channel_target_id == TS3IDs.CHANNEL_ID_AFK_LONG)) {
                     Utility.getManagerClients().get(unique_identifier).setActivityStatus(Types.IS_AFK);
                     ChannelDescription.update(Utility.getClientRole(client));

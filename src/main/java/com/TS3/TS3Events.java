@@ -52,97 +52,97 @@ public class TS3Events {
         event_adapter_ = new TS3EventAdapter() {
 
             @Override
-            public void onTextMessage(TextMessageEvent textEvent) {
-                if (textEvent.getInvokerId() != TS3Connection.whoAmI().getId()) {
-                    BotMain.getLogger().info(textEvent.getTargetMode() + " message from " + textEvent.getInvokerName() + " (UUID: " + textEvent.getInvokerUniqueId() + "): " + textEvent.getMessage());
-                    Commands.execute(textEvent);
+            public void onTextMessage(TextMessageEvent text_event) {
+                if (text_event.getInvokerId() != TS3Connection.whoAmI().getId()) {
+                    BotMain.getLogger().info(text_event.getTargetMode() + " message from " + text_event.getInvokerName() + " (UUID: " + text_event.getInvokerUniqueId() + "): " + text_event.getMessage());
+                    Commands.execute(text_event);
                     for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_TEXT)) {
-                        listener.onTextMessage(textEvent);
+                        listener.onTextMessage(text_event);
                     }
                 }
             }
 
             @Override
-            public void onClientJoin(ClientJoinEvent joinEvent) {
-                BotMain.getLogger().debug("Client went online: " + joinEvent.getClientId() + "  " + joinEvent.getClientNickname());
-                if (joinEvent.getClientType() == 0) {
-                    Client client = api_.getClientInfo(joinEvent.getClientId());
+            public void onClientJoin(ClientJoinEvent join_event) {
+                BotMain.getLogger().debug("Client went online: " + join_event.getClientId() + "  " + join_event.getClientNickname());
+                if (join_event.getClientType() == 0) {
+                    Client client = api_.getClientInfo(join_event.getClientId());
                     TS3Infos.addOnlineClient(client);
                 }
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CL_JOIN)) {
-                    listener.onClientJoin(joinEvent);
+                    listener.onClientJoin(join_event);
                 }
             }
 
             @Override
-            public void onClientLeave(ClientLeaveEvent leaveEvent) {
-                BotMain.getLogger().debug("Client went offline: " + leaveEvent.getClientId());
+            public void onClientLeave(ClientLeaveEvent leave_event) {
+                BotMain.getLogger().debug("Client went offline: " + leave_event.getClientId());
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CL_LEAVE)) {
-                    listener.onClientLeave(leaveEvent);
+                    listener.onClientLeave(leave_event);
                 }
-                TS3Infos.removeOnlineClient(leaveEvent.getClientId());
+                TS3Infos.removeOnlineClient(leave_event.getClientId());
             }
 
             @Override
-            public void onServerEdit(ServerEditedEvent serverEditedEvent) {
+            public void onServerEdit(ServerEditedEvent server_edited_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_SE_EDIT)) {
-                    listener.onServerEdit(serverEditedEvent);
+                    listener.onServerEdit(server_edited_event);
                 }
             }
 
             @Override
-            public void onChannelEdit(ChannelEditedEvent channelEditedEvent) {
+            public void onChannelEdit(ChannelEditedEvent channel_edited_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CH_EDIT)) {
-                    listener.onChannelEdit(channelEditedEvent);
+                    listener.onChannelEdit(channel_edited_event);
                 }
             }
 
             @Override
-            public void onChannelDescriptionChanged(ChannelDescriptionEditedEvent channelDescriptionEditedEvent) {
+            public void onChannelDescriptionChanged(ChannelDescriptionEditedEvent channel_description_edited_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CH_DESCRIPTION)) {
-                    listener.onChannelDescriptionChanged(channelDescriptionEditedEvent);
+                    listener.onChannelDescriptionChanged(channel_description_edited_event);
                 }
             }
 
             @Override
-            public void onClientMoved(ClientMovedEvent movedEvent) {
+            public void onClientMoved(ClientMovedEvent moved_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CL_MOVED)) {
-                    listener.onClientMoved(movedEvent);
+                    listener.onClientMoved(moved_event);
                 }
             }
 
             @Override
-            public void onChannelCreate(ChannelCreateEvent channelCreateEvent) {
+            public void onChannelCreate(ChannelCreateEvent channel_create_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CH_CREATE)) {
-                    listener.onChannelCreate(channelCreateEvent);
+                    listener.onChannelCreate(channel_create_event);
                 }
             }
 
             @Override
-            public void onChannelDeleted(ChannelDeletedEvent channelDeletedEvent) {
+            public void onChannelDeleted(ChannelDeletedEvent channel_deleted_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CH_DELETE)) {
-                    listener.onChannelDeleted(channelDeletedEvent);
+                    listener.onChannelDeleted(channel_deleted_event);
                 }
             }
 
             @Override
-            public void onChannelMoved(ChannelMovedEvent channelMovedEvent) {
+            public void onChannelMoved(ChannelMovedEvent channel_moved_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CH_MOVED)) {
-                    listener.onChannelMoved(channelMovedEvent);
+                    listener.onChannelMoved(channel_moved_event);
                 }
             }
 
             @Override
-            public void onChannelPasswordChanged(ChannelPasswordChangedEvent channelPasswordChangedEvent) {
+            public void onChannelPasswordChanged(ChannelPasswordChangedEvent channel_password_changed_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CH_PASSWORD)) {
-                    listener.onChannelPasswordChanged(channelPasswordChangedEvent);
+                    listener.onChannelPasswordChanged(channel_password_changed_event);
                 }
             }
 
             @Override
-            public void onPrivilegeKeyUsed(PrivilegeKeyUsedEvent privilegeKeyUsedEvent) {
+            public void onPrivilegeKeyUsed(PrivilegeKeyUsedEvent privilege_key_used_event) {
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_PRIV_KEY)) {
-                    listener.onPrivilegeKeyUsed(privilegeKeyUsedEvent);
+                    listener.onPrivilegeKeyUsed(privilege_key_used_event);
                 }
             }
         };

@@ -11,8 +11,8 @@ public class Utility {
     private static String welcome_message_;
 
     public static String getWelcomeMessage(ClientJoinEvent joinEvent) {
-        String message_ = welcome_message_.replace("%CLIENT_NICKNAME%", joinEvent.getClientNickname());
-        return message_;
+        String message = welcome_message_.replace("%CLIENT_NICKNAME%", joinEvent.getClientNickname());
+        return message;
     }
 
     public static void loadMessage() {
