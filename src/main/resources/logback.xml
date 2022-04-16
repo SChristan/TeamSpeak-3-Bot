@@ -20,7 +20,7 @@
     </rollingPolicy>
     <encoder><pattern>%d{HH:mm:ss.SSS} [%level] [TS3-API] - %msg%n</pattern></encoder>
   </appender>
-  <logger name="com.github.theholywaffle" level="${level}" additivity="TRUE">   <!-- additivity: If the message will be added to the parent logger. -->
+  <logger name="com.github.theholywaffle" level="${level}" additivity="FALSE">   <!-- additivity: If the message will be added to the parent logger. -->
         <appender-ref ref="TS3_API_LOGGER"/>
   </logger>
 
