@@ -15,7 +15,7 @@ The commands for this feature start with "!wm" followed by a colon and the actua
 Example: `!wm:exit`
 
 The following commands are available:
-command | Description
+Command | Description
 --- | ---
 exit | Stops any activity of this feature.
 reload | Reloads all information from the database.

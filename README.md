@@ -18,7 +18,7 @@ The commands for the bot start with "!bot" followed by a colon and the actual co
 Example: `!bot:exit`
 
 The following commands are available:
-command | Description
+Command | Description
 --- | ---
 exit | Stops any activity of the bot and terminates the application.
 restart | Restarts all functionalities of the bot, like at startup.
