@@ -8,13 +8,11 @@ import java.util.List;
 import com.Types;
 import com.bot.BotMain;
 import com.bot.Commands;
-import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.*;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 
 public class TS3Events {
 
-    private static TS3Api api_ = TS3Connection.getApi();
     private static TS3EventAdapter event_adapter_;
     private static HashMap<Types, List<TS3EventAdapter>> event_listeners_ = new HashMap<Types, List<TS3EventAdapter>>();
     private static List<Types> ts3_event_types = Arrays.asList(Types.EVENT_TEXT, Types.EVENT_CL_JOIN, Types.EVENT_CL_LEAVE, Types.EVENT_SE_EDIT, Types.EVENT_CH_EDIT, Types.EVENT_CH_DESCRIPTION, Types.EVENT_CL_MOVED, Types.EVENT_CH_CREATE, Types.EVENT_CH_DELETE, Types.EVENT_CH_MOVED, Types.EVENT_CH_PASSWORD, Types.EVENT_PRIV_KEY);
@@ -34,11 +32,11 @@ public class TS3Events {
     public static void startListen() {
         initializeEventTopics();
         createEventAdapter();
-        api_.addTS3Listeners(event_adapter_);
+        TS3Connection.getApi().addTS3Listeners(event_adapter_);
     }
 
     public static void stopListen() {
-        api_.removeTS3Listeners(event_adapter_);
+        TS3Connection.getApi().removeTS3Listeners(event_adapter_);
     }
 
     private static void initializeEventTopics() {
@@ -66,7 +64,7 @@ public class TS3Events {
             public void onClientJoin(ClientJoinEvent join_event) {
                 BotMain.getLogger().debug("Client went online: " + join_event.getClientId() + "  " + join_event.getClientNickname());
                 if (join_event.getClientType() == 0) {
-                    Client client = api_.getClientInfo(join_event.getClientId());
+                    Client client = TS3Connection.getApi().getClientInfo(join_event.getClientId());
                     TS3Infos.addOnlineClient(client);
                 }
                 for (TS3EventAdapter listener : event_listeners_.get(Types.EVENT_CL_JOIN)) {
