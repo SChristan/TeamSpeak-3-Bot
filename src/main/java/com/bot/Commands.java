@@ -17,8 +17,8 @@ public class Commands {
 
     public static void loadAuthorizedGroups() {
         try {
-            authorized_groups_.clear();
             ResultSet result = MySQL.getStatement().executeQuery("SELECT * FROM bot__verified_servergroups");
+            authorized_groups_.clear();
             while (result.next()) {
                 authorized_groups_.add(result.getInt("group_id"));
             }

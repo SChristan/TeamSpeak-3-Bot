@@ -84,19 +84,18 @@ public class Utility {
 
     public static void loadGroups() {
         try {
-            manager_groups_.clear();
-            supporter_groups_.clear();
-
             ResultSet result;
 
             // Manager
             result = MySQL.getStatement().executeQuery("SELECT * FROM ad__channeldescription WHERE servergroup_designation='manager' ORDER BY sort ASC");
+            manager_groups_.clear();
             while (result.next()) {
                 manager_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
 
             // Supporter
             result = MySQL.getStatement().executeQuery("SELECT * FROM ad__channeldescription WHERE servergroup_designation='supporter' ORDER BY sort ASC");
+            supporter_groups_.clear();
             while (result.next()) {
                 supporter_groups_.add(new ServergroupInfos(result.getInt("servergroup_id"), result.getString("servergroup_header") + "\n"));
             }
