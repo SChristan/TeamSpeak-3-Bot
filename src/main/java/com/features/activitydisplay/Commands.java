@@ -38,10 +38,10 @@ public class Commands {
         return false;
     }
 
-    public static void execute(TextMessageEvent textEvent) {
-        String[] parts = textEvent.getMessage().split(":");
+    public static void execute(TextMessageEvent text_event) {
+        String[] parts = text_event.getMessage().split(":");
         if (parts[0].equalsIgnoreCase("!ad")) {
-            Client client = TS3Infos.getOnlineClients().get(textEvent.getInvokerId());
+            Client client = TS3Infos.getOnlineClients().get(text_event.getInvokerId());
             if (hasRights(client)) {
                 if (parts[1].equalsIgnoreCase("exit")) {
                     ActivityDisplay.stop();
@@ -53,10 +53,10 @@ public class Commands {
                     ChannelDescription.update(Types.IS_MANAGER_AND_SUPPORTER);
                     ActivityDisplay.getLogger().info("ActivityDisplay was reloaded by the reload command.");
                 } else {
-                    TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command.");
+                    TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "Unknown command.");
                 }
             } else {
-                TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "You are not my master!");
+                TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "You are not my master!");
             }
         }
     }

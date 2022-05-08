@@ -10,8 +10,8 @@ public class Utility {
 
     private static String welcome_message_;
 
-    public static String getWelcomeMessage(ClientJoinEvent joinEvent) {
-        String message = welcome_message_.replace("%CLIENT_NICKNAME%", joinEvent.getClientNickname());
+    public static String getWelcomeMessage(ClientJoinEvent join_event) {
+        String message = welcome_message_.replace("%CLIENT_NICKNAME%", join_event.getClientNickname());
         return message;
     }
 

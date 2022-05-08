@@ -37,10 +37,10 @@ public class Commands {
         return false;
     }
 
-    public static void execute(TextMessageEvent textEvent) {
-        String[] parts = textEvent.getMessage().split(":");
+    public static void execute(TextMessageEvent text_event) {
+        String[] parts = text_event.getMessage().split(":");
         if (parts[0].equalsIgnoreCase("!wm")) {
-            Client client = TS3Infos.getOnlineClients().get(textEvent.getInvokerId());
+            Client client = TS3Infos.getOnlineClients().get(text_event.getInvokerId());
             if (hasRights(client)) {
                 if (parts[1].equalsIgnoreCase("exit")) {
                     WelcomeMessage.stop();
@@ -49,10 +49,10 @@ public class Commands {
                     loadAuthorizedGroups();
                     Utility.loadMessage();
                 } else {
-                    TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "Unknown command.");
+                    TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "Unknown command.");
                 }
             } else {
-                TS3Connection.getApi().sendPrivateMessage(textEvent.getInvokerId(), "You are not my master!");
+                TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "You are not my master!");
             }
         }
     }
