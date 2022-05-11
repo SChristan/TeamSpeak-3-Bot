@@ -22,7 +22,7 @@ Command | Description
 --- | ---
 exit | Stops any activity of the bot and terminates the application.
 restart | Restarts all functionalities of the bot, like at startup.
-nickname:\<name> | Sets the Teamspeak nickname of the bot to the specified name.
+nickname:`<name>` | Sets the Teamspeak nickname of the bot to the specified name.
 
 ## Database Information
 ### Database Connection
