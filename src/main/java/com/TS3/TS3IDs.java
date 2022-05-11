@@ -26,6 +26,7 @@ public class TS3IDs {
     public static int CHANNEL_ID_WAMM; // "Warten auf Management"
     public static int CHANNEL_ID_AFK_SHORT; // "Kurz AFK"
     public static int CHANNEL_ID_AFK_LONG; // "Lang AFK"
+    public static int CHANNEL_ID_STREAMER; // "Unsere Community Streamer"
 
     public static void load() {
         try {
@@ -58,6 +59,7 @@ public class TS3IDs {
             CHANNEL_ID_WAMM = channelID_map.get("warten_management");
             CHANNEL_ID_AFK_SHORT = channelID_map.get("afk_short");
             CHANNEL_ID_AFK_LONG = channelID_map.get("afk_long");
+            CHANNEL_ID_STREAMER = channelID_map.get("stream_header");
 
             result.close();
             BotMain.getLogger().info("TS3Constants were initialised.");

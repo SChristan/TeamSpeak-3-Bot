@@ -3,6 +3,7 @@ package com.bot;
 import com.MySQL;
 import com.features.activitydisplay.ActivityDisplay;
 import com.features.maxserverclients.MaxServerClients;
+import com.features.twitchdisplay.TwitchDisplay;
 import com.features.welcomemessage.WelcomeMessage;
 import com.ts3.TS3Connection;
 import com.ts3.TS3Events;
@@ -28,10 +29,12 @@ public class BotMain {
         ActivityDisplay.start();
         MaxServerClients.start();
         WelcomeMessage.start();
+        TwitchDisplay.start();
         log_.info("The bot was started. " + TS3IDs.VERSION);
     }
 
     public static void stop() {
+        TwitchDisplay.stop();
         ActivityDisplay.stop();
         MaxServerClients.stop();
         WelcomeMessage.stop();
