@@ -7,7 +7,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/root_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [ROOT] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
   <root level="${level}">
     <appender-ref ref="ROOT_LOGGER" />
@@ -18,9 +18,9 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/ts3-api_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [TS3-API] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
-  <logger name="com.github.theholywaffle" level="DEBUG" additivity="FALSE">   <!-- additivity: If the message will be added to the parent logger. -->
+  <logger name="com.github.theholywaffle" level="DEBUG" additivity="TRUE">   <!-- additivity: If the message will be added to the parent logger. -->
         <appender-ref ref="TS3_API_LOGGER"/>
   </logger>
 
@@ -29,7 +29,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/bot_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [BOT] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
   <logger name="com.bot.BotMain" level="${level}" additivity="TRUE">
         <appender-ref ref="BOT_MAIN_LOGGER"/>
@@ -40,7 +40,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/activityDisplay_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [AD] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
   <logger name="com.features.activitydisplay.ActivityDisplay" level="${level}" additivity="TRUE">
         <appender-ref ref="ACTIVITY_DISPLAY_LOGGER"/>
@@ -51,7 +51,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/maxServerClients_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [MSC] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
   <logger name="com.features.maxserverclients.MaxServerClients" level="${level}" additivity="TRUE">
         <appender-ref ref="MAX_SERVER_CLIENTS_LOGGER"/>
@@ -62,7 +62,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/welcomeMessage_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [WM] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
   <logger name="com.features.welcomemessage.WelcomeMessage" level="${level}" additivity="TRUE">
         <appender-ref ref="WELCOME_MESSAGE_LOGGER"/>
@@ -73,7 +73,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/%d{yyyy, aux}/twitchDisplay_%d{yyyy-MM}.log</fileNamePattern>
     </rollingPolicy>
-    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [TD] - %msg%n</pattern></encoder>
+    <encoder><pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] - %msg%n</pattern></encoder>
   </appender>
   <logger name="com.features.twitchdisplay.TwitchDisplay" level="${level}" additivity="TRUE">
         <appender-ref ref="TWITCH_DISPLAY_LOGGER"/>
