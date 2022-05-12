@@ -17,6 +17,7 @@ public class TwitchDisplay {
 
     public static void stop() {
         Events.stopListen();
+        TwitchListener.stopListen();
     }
 
     public static Logger getLogger() {

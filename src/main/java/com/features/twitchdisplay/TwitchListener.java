@@ -11,9 +11,14 @@ import org.json.JSONObject;
 
 public class TwitchListener {
 
+    private static Timer timer_ = new Timer();
+    
+    public static void stopListen() {
+        timer_.cancel();
+    }
+
     public static void listen() {
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        timer_.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
