@@ -21,14 +21,8 @@ public class MySQL {
     private static Statement statement_;
     
     public static void connect() {
-        try {
-            loadDBParameter();
-            connection_ = DriverManager.getConnection(db_url_, db_username_, db_password_);
-            statement_ = connection_.createStatement();
-            BotMain.getLogger().info("Database connection was established.");
-        } catch (SQLException e) {
-            BotMain.getLogger().error("Database access error occured.", e);
-        }
+        loadDBParameter();
+        reconnect();
     }
 
     public static void disconnect() {
@@ -42,7 +36,24 @@ public class MySQL {
     }
 
     public static Statement getStatement() {
+        try {
+            if (statement_.isClosed()) {
+                reconnect();
+            }
+        } catch (SQLException e) {
+            BotMain.getLogger().error("Database access error occured.", e);
+        }
         return statement_;
+    }
+    
+    private static void reconnect() {
+        try {
+            connection_ = DriverManager.getConnection(db_url_, db_username_, db_password_);
+            statement_ = connection_.createStatement();
+            BotMain.getLogger().info("Database connection was established.");
+        } catch (SQLException e) {
+            BotMain.getLogger().error("Database access error occured.", e);
+        }
     }
 
     private static void loadDBParameter() {
