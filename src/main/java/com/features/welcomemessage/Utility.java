@@ -15,6 +15,15 @@ public class Utility {
         return message;
     }
 
+    public static void setWelcomeMessage(String message) {
+        welcome_message_ = message;
+        try {
+            MySQL.getStatement().executeQuery("UPDATE `wm__messages` SET message = " + message + "WHERE id='NEWS'");
+        } catch (SQLException e) {
+            WelcomeMessage.getLogger().error("Database query failed.", e);
+        }
+    }
+
     public static void loadMessage() {
         try {
             ResultSet result;

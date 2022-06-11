@@ -48,6 +48,9 @@ public class Commands {
                 } else if (parts[1].equalsIgnoreCase("reload")) {
                     loadAuthorizedGroups();
                     Utility.loadMessage();
+                } else if (parts[1].equalsIgnoreCase("message")) {
+                    String message = text_event.getMessage().substring(12);
+                    Utility.setWelcomeMessage(message);
                 } else {
                     TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "Unknown command.");
                 }
