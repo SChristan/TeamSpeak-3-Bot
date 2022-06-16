@@ -36,14 +36,13 @@ public class MySQL {
     }
 
     public static Statement getStatement() {
-        try {
-            if (connection_.isClosed()) {
-                openConnection();
-            }
-        } catch (SQLException e) {
-            BotMain.getLogger().error("Database access error occured.", e);
-        }
+        checkClosed();
         return statement_;
+    }
+
+    public static Connection getConnection() {
+        checkClosed();
+        return connection_;
     }
     
     private static void openConnection() {
@@ -51,6 +50,16 @@ public class MySQL {
             connection_ = DriverManager.getConnection(db_url_, db_username_, db_password_);
             statement_ = connection_.createStatement();
             BotMain.getLogger().info("Database connection was established.");
+        } catch (SQLException e) {
+            BotMain.getLogger().error("Database access error occured.", e);
+        }
+    }
+    
+    public static void checkClosed() {
+        try {
+            if (connection_.isClosed()) {
+                openConnection();
+            }
         } catch (SQLException e) {
             BotMain.getLogger().error("Database access error occured.", e);
         }
