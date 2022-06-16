@@ -19,6 +19,7 @@ Command | Description
 --- | ---
 exit | Stops any activity of this feature.
 reload | Reloads all information from the database.
+message:`<message>` | Overwrites the current welcome message with a new one.<br />`message`: The new welcome message.
 
 ## Database Structure
 ### Authorized Servergroups
