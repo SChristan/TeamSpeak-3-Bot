@@ -42,9 +42,9 @@ public class ChannelDescription {
             TS3Connection.getApi().editChannel(TS3IDs.CHANNEL_ID_STREAMER, ChannelProperty.CHANNEL_DESCRIPTION, channel_description);
             channel_description_old = channel_description;
             if (log_info == "")
-                TwitchDisplay.getLogger().info("There is no streamer live anymore.");
+                TwitchDisplay.getLogger().info("There is no streamer live.");
             else
-                TwitchDisplay.getLogger().info("Streamer currently live: " + log_info);
+                TwitchDisplay.getLogger().info("Streamer currently live: " + log_info.substring(0, log_info.length() - 2));
         }
     }
 }
