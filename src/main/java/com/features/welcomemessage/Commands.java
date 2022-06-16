@@ -50,7 +50,10 @@ public class Commands {
                     Utility.loadMessage();
                 } else if (parts[1].equalsIgnoreCase("message")) {
                     String message = text_event.getMessage().substring(12);
-                    Utility.setWelcomeMessage(message);
+                    int errCode = Utility.setWelcomeMessage(message);
+                    if (errCode == -1) {
+                        TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The welcome message was temporarily updated but not transferred to the database.");
+                    }
                 } else {
                     TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "Unknown command.");
                 }
