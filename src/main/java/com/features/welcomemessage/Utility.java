@@ -19,6 +19,7 @@ public class Utility {
         welcome_message_ = message;
         try {
             MySQL.getStatement().executeQuery("UPDATE `wm__messages` SET message = " + message + "WHERE id='NEWS'");
+            WelcomeMessage.getLogger().info("Welcome message updated.");
         } catch (SQLException e) {
             WelcomeMessage.getLogger().error("Database query failed.", e);
         }
