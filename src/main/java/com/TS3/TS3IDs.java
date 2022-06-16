@@ -9,7 +9,7 @@ import com.bot.BotMain;
 
 public class TS3IDs {
     // Code version
-    public static String VERSION = "Version 1.1.4";
+    public static String VERSION = "Version 1.1.5";
 
     // Config
     public static String HOSTNAME;
