@@ -22,7 +22,7 @@ public class MySQL {
     
     public static void connect() {
         loadDBParameter();
-        reconnect();
+        openConnection();
     }
 
     public static void disconnect() {
@@ -38,7 +38,7 @@ public class MySQL {
     public static Statement getStatement() {
         try {
             if (connection_.isClosed()) {
-                reconnect();
+                openConnection();
             }
         } catch (SQLException e) {
             BotMain.getLogger().error("Database access error occured.", e);
@@ -46,7 +46,7 @@ public class MySQL {
         return statement_;
     }
     
-    private static void reconnect() {
+    private static void openConnection() {
         try {
             connection_ = DriverManager.getConnection(db_url_, db_username_, db_password_);
             statement_ = connection_.createStatement();
