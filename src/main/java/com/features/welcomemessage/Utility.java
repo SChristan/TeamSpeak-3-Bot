@@ -1,5 +1,6 @@
 package com.features.welcomemessage;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,7 +19,10 @@ public class Utility {
     public static int setWelcomeMessage(String message) {
         welcome_message_ = message;
         try {
-            MySQL.getStatement().executeQuery("UPDATE `wm__messages` SET message = " + message + "WHERE id='NEWS'");
+            PreparedStatement ps = MySQL.getConnection().prepareStatement("UPDATE wm__messages SET message=? WHERE id=?");
+            ps.setString(1, message);
+            ps.setString(2, "NEWS");
+            ps.executeUpdate();
             WelcomeMessage.getLogger().info("Welcome message updated.");
             return 0;
         } catch (SQLException e) {
