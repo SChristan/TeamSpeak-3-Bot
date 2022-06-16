@@ -37,7 +37,7 @@ public class MySQL {
 
     public static Statement getStatement() {
         try {
-            if (statement_.isClosed()) {
+            if (connection_.isClosed()) {
                 reconnect();
             }
         } catch (SQLException e) {
