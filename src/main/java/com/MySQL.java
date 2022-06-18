@@ -36,12 +36,12 @@ public class MySQL {
     }
 
     public static Statement getStatement() {
-        checkClosed();
+        checkConnection();
         return statement_;
     }
 
     public static Connection getConnection() {
-        checkClosed();
+        checkConnection();
         return connection_;
     }
     
@@ -55,9 +55,10 @@ public class MySQL {
         }
     }
     
-    public static void checkClosed() {
+    private static void checkConnection() {
         try {
-            if (connection_.isClosed()) {
+            if (!connection_.isValid(3)) {
+                BotMain.getLogger().info("Validation of the database connection failed.");
                 openConnection();
             }
         } catch (SQLException e) {
