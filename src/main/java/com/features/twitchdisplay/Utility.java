@@ -43,7 +43,7 @@ public class Utility {
         }
     }
 
-    public static void addStreamer(String user_login, String display_name) {
+    public static int addStreamer(String user_login, String display_name) {
         try {
             Utility.getStreamer().put(user_login, new StreamerInfo(user_login, display_name, Types.TWITCH_OFFLINE));
             PreparedStatement ps = MySQL.getConnection().prepareStatement("INSERT INTO td__streamer (user_login, display_name) VALUES (?, ?)");
@@ -51,20 +51,24 @@ public class Utility {
             ps.setString(2, display_name);
             ps.executeUpdate();
 			TwitchDisplay.getLogger().info("Added streamer into database: " + user_login + " / " + display_name);
+            return 0;
         } catch (SQLException e) {
             TwitchDisplay.getLogger().error("Database query failed.", e);
+            return -1;
         }
     }
 
-    public static void removeStreamer(String user_login) {
+    public static int removeStreamer(String user_login) {
         try {
             Utility.getStreamer().remove(user_login);
             PreparedStatement ps = MySQL.getConnection().prepareStatement("DELETE FROM td__streamer WHERE user_login=?");
             ps.setString(1, user_login);
             ps.executeUpdate();
 			TwitchDisplay.getLogger().info("Removed streamer from database: " + user_login);
+            return 0;
         } catch (SQLException e) {
             TwitchDisplay.getLogger().error("Database query failed.", e);
+            return -1;
         }
     }
 

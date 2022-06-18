@@ -53,14 +53,20 @@ public class Commands {
                     TwitchDisplay.getLogger().info("TwitchDisplay was reloaded by the reload command.");
                 } else if (parts[1].equalsIgnoreCase("addstreamer")) {
                     if (parts.length == 4 && !parts[2].isEmpty() && !parts[3].isEmpty()) {
-                        Utility.addStreamer(parts[2], parts[3]);
+                        int errCode = Utility.addStreamer(parts[2], parts[3]);
+                        if (errCode == -1) {
+                            TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The streamer was temporarily added but not transferred to the database.");
+                        }
                     } else {
                         TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "Invalid input.");
                         TwitchDisplay.getLogger().info("Invalid input at addstreamer command.");
                     }
                 } else if (parts[1].equalsIgnoreCase("removestreamer")) {
                     if (parts.length == 3 && !parts[2].isEmpty()) {
-                        Utility.removeStreamer(parts[2]);
+                        int errCode = Utility.removeStreamer(parts[2]);
+                        if (errCode == -1) {
+                            TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The streamer was temporarily removed but not deleted from the database.");
+                        }
                     } else {
                         TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "Invalid input.");
                         TwitchDisplay.getLogger().info("Invalid input at removestreamer command.");
