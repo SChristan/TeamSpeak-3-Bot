@@ -35,9 +35,9 @@ public class BotMain {
 
     public static void stop() {
         TwitchDisplay.stop();
-        ActivityDisplay.stop();
-        MaxServerClients.stop();
         WelcomeMessage.stop();
+        MaxServerClients.stop();
+        ActivityDisplay.stop();
         TS3Events.stopListen();
         TS3Connection.disconnect();
         MySQL.disconnect();
