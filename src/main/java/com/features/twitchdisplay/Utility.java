@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -45,8 +46,11 @@ public class Utility {
     public static void addStreamer(String user_login, String display_name) {
         try {
             Utility.getStreamer().put(user_login, new StreamerInfo(user_login, display_name, Types.TWITCH_OFFLINE));
-            MySQL.getStatement().executeQuery("INSERT INTO `td__streamer` (user_login, display_name) VALUES ('" + user_login + "', '" + display_name + "')");
-			TwitchDisplay.getLogger().info("Added streamer into database: " + user_login + "/" + display_name);
+            PreparedStatement ps = MySQL.getConnection().prepareStatement("INSERT INTO td__streamer (user_login, display_name) VALUES (?, ?)");
+            ps.setString(1, user_login);
+            ps.setString(2, display_name);
+            ps.executeUpdate();
+			TwitchDisplay.getLogger().info("Added streamer into database: " + user_login + " / " + display_name);
         } catch (SQLException e) {
             TwitchDisplay.getLogger().error("Database query failed.", e);
         }
@@ -55,7 +59,9 @@ public class Utility {
     public static void removeStreamer(String user_login) {
         try {
             Utility.getStreamer().remove(user_login);
-            MySQL.getStatement().executeQuery("DELETE FROM `td__streamer` WHERE `user_login` = '" + user_login + "'");
+            PreparedStatement ps = MySQL.getConnection().prepareStatement("DELETE FROM td__streamer WHERE user_login=?");
+            ps.setString(1, user_login);
+            ps.executeUpdate();
 			TwitchDisplay.getLogger().info("Removed streamer from database: " + user_login);
         } catch (SQLException e) {
             TwitchDisplay.getLogger().error("Database query failed.", e);
