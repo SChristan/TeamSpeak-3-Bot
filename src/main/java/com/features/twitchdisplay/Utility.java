@@ -95,7 +95,7 @@ public class Utility {
                 first_API_attempt_ = true;
                 return response;
             }
-            TwitchDisplay.getLogger().error("Twitch API request failed.", e);
+            TwitchDisplay.getLogger().error("Twitch API request failed. (Code: " + response_code + ")", e);
             return null;
         }
     }
