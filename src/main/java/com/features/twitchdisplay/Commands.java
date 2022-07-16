@@ -53,7 +53,7 @@ public class Commands {
                     TwitchDisplay.getLogger().info("TwitchDisplay was reloaded by the reload command.");
                 } else if (parts[1].equalsIgnoreCase("addstreamer")) {
                     if (parts.length == 4 && !parts[2].isEmpty() && !parts[3].isEmpty()) {
-                        int errCode = Utility.addStreamer(parts[2], parts[3]);
+                        int errCode = Utility.addStreamer(parts[2].toLowerCase(), parts[3]);
                         if (errCode == -1) {
                             TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The streamer was temporarily added but not transferred to the database.");
                         }
@@ -63,7 +63,7 @@ public class Commands {
                     }
                 } else if (parts[1].equalsIgnoreCase("removestreamer")) {
                     if (parts.length == 3 && !parts[2].isEmpty()) {
-                        int errCode = Utility.removeStreamer(parts[2]);
+                        int errCode = Utility.removeStreamer(parts[2].toLowerCase());
                         if (errCode == -1) {
                             TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The streamer was temporarily removed but not deleted from the database.");
                         }

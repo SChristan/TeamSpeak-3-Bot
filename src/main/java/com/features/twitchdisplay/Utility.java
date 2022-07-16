@@ -30,7 +30,7 @@ public class Utility {
             ResultSet result = MySQL.getStatement().executeQuery("SELECT * FROM td__streamer ORDER BY display_name");
             streamer_.clear();
             while (result.next()) {
-                String user_login = result.getString("user_login");
+                String user_login = result.getString("user_login").toLowerCase();
                 String display_name = result.getString("display_name");
 
                 streamer_.put(user_login, new StreamerInfo(user_login, display_name, Types.TWITCH_OFFLINE));

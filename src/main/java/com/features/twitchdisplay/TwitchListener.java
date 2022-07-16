@@ -36,7 +36,7 @@ public class TwitchListener {
                 JSONArray response_data = response_root.getJSONArray("data");
                 
                 for (int i = 0; i < response_data.length(); i++) {
-                    Utility.getStreamer().get(response_data.getJSONObject(i).getString("user_login")).setLiveStatus(Types.TWITCH_LIVE);
+                    Utility.getStreamer().get(response_data.getJSONObject(i).getString("user_login").toLowerCase()).setLiveStatus(Types.TWITCH_LIVE);
                 }
                 ChannelDescription.update();
             }
