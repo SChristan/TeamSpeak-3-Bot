@@ -45,7 +45,7 @@ public class Utility {
 
     public static int addStreamer(String user_login, String display_name) {
         try {
-            Utility.getStreamer().put(user_login, new StreamerInfo(user_login, display_name, Types.TWITCH_OFFLINE));
+            streamer_.put(user_login, new StreamerInfo(user_login, display_name, Types.TWITCH_OFFLINE));
             PreparedStatement ps = MySQL.getConnection().prepareStatement("INSERT INTO td__streamer (user_login, display_name) VALUES (?, ?)");
             ps.setString(1, user_login);
             ps.setString(2, display_name);
@@ -60,7 +60,7 @@ public class Utility {
 
     public static int removeStreamer(String user_login) {
         try {
-            Utility.getStreamer().remove(user_login);
+            streamer_.remove(user_login);
             PreparedStatement ps = MySQL.getConnection().prepareStatement("DELETE FROM td__streamer WHERE user_login=?");
             ps.setString(1, user_login);
             ps.executeUpdate();
