@@ -52,6 +52,7 @@ public class Commands {
                     Utility.loadStreamer();
                     TwitchDisplay.getLogger().info("TwitchDisplay was reloaded by the reload command.");
                 } else if (parts[1].equalsIgnoreCase("addstreamer")) {
+                    parts = text_event.getMessage().split(":", 4);
                     if (parts.length == 4 && !parts[2].isEmpty() && !parts[3].isEmpty()) {
                         int errCode = Utility.addStreamer(parts[2].toLowerCase(), parts[3]);
                         if (errCode == -1) {
