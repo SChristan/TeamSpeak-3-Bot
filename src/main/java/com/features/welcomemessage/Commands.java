@@ -47,10 +47,13 @@ public class Commands {
                     WelcomeMessage.getLogger().info("WelcomeMessage was stopped by the exit command.");
                 } else if (parts[1].equalsIgnoreCase("reload")) {
                     loadAuthorizedGroups();
-                    Utility.loadMessage();
+                    int errCode = Utility.loadMessage();
+                    if (errCode == -1) {
+                        TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The welcome wasn't loaded from the database.");
+                    }
                 } else if (parts[1].equalsIgnoreCase("message")) {
-                    String message = text_event.getMessage().substring(12);
-                    int errCode = Utility.setWelcomeMessage(message);
+                    parts = text_event.getMessage().split(":", 3);
+                    int errCode = Utility.setWelcomeMessage(parts[2]);
                     if (errCode == -1) {
                         TS3Connection.getApi().sendPrivateMessage(text_event.getInvokerId(), "The welcome message was temporarily updated but not transferred to the database.");
                     }

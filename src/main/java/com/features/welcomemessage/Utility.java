@@ -31,7 +31,7 @@ public class Utility {
         }
     }
 
-    public static void loadMessage() {
+    public static int loadMessage() {
         try {
             ResultSet result;
             result = MySQL.getStatement().executeQuery("SELECT * FROM wm__messages WHERE id='NEWS'");
@@ -42,8 +42,10 @@ public class Utility {
             result.close();
             
             WelcomeMessage.getLogger().info("Welcome message loaded.");
+            return 0;
         } catch (SQLException e) {
             WelcomeMessage.getLogger().error("Database query failed.", e);
+            return -1;
         }
     }
 }
