@@ -1,8 +1,8 @@
 package com.features.twitchdisplay;
 
+import java.util.Map.Entry;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Map.Entry;
 
 import com.Types;
 
@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class TwitchListener {
 
     private static Timer timer_;
-    
+
     public static void stopListen() {
         timer_.cancel();
     }
@@ -23,22 +23,26 @@ public class TwitchListener {
 
             @Override
             public void run() {
-                String user_logins = "";
-                for (Entry<String, StreamerInfo> streamer : Utility.getStreamer().entrySet()) {
-                    user_logins = user_logins + "user_login=" + streamer.getValue().getUserLogin() + "&";
-                }
+                try {
+                    String user_logins = "";
+                    for (Entry<String, StreamerInfo> streamer : Utility.getStreamer().entrySet()) {
+                        user_logins = user_logins + "user_login=" + streamer.getValue().getUserLogin() + "&";
+                    }
 
-                for (Entry<String, StreamerInfo> streamer : Utility.getStreamer().entrySet()) {
-                    streamer.getValue().setLiveStatus(Types.TWITCH_OFFLINE);
-                }
+                    for (Entry<String, StreamerInfo> streamer : Utility.getStreamer().entrySet()) {
+                        streamer.getValue().setLiveStatus(Types.TWITCH_OFFLINE);
+                    }
 
-                JSONObject response_root = Utility.twitchAPIRequest("https://api.twitch.tv/helix/streams?" + user_logins);
-                JSONArray response_data = response_root.getJSONArray("data");
-                
-                for (int i = 0; i < response_data.length(); i++) {
-                    Utility.getStreamer().get(response_data.getJSONObject(i).getString("user_login").toLowerCase()).setLiveStatus(Types.TWITCH_LIVE);
+                    JSONObject response_root = Utility.twitchAPIRequest("https://api.twitch.tv/helix/streams?" + user_logins);
+                    JSONArray response_data = response_root.getJSONArray("data");
+
+                    for (int i = 0; i < response_data.length(); i++) {
+                        Utility.getStreamer().get(response_data.getJSONObject(i).getString("user_login").toLowerCase()).setLiveStatus(Types.TWITCH_LIVE);
+                    }
+                    ChannelDescription.update();
+                } catch (Exception e) {
+                    TwitchDisplay.getLogger().error("Twitch Listener threw an exception.", e);
                 }
-                ChannelDescription.update();
             }
 
         }, 0, 10 * 1000);
