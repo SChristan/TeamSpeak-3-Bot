@@ -1,4 +1,4 @@
-# GermanMonkeys Bot
+# TeamSpeak 3 Bot
 ## Table of Contents
 1. [Commands](#commands)
 1. [Database Information](#database-information)
